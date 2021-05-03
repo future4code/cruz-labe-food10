@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../Services/api";
 
-export default function useRequestData(url, initState) {
+export default function useRequestData(url, initState, id) {
   const [data, setData] = useState(initState);
   api.defaults.headers.common["auth"] = localStorage.getItem("token");
 
@@ -9,7 +9,12 @@ export default function useRequestData(url, initState) {
     api
       .get(url)
       .then((response) => {
-        setData(response.data);
+        if(id){
+          setData(response.data[id])
+        }
+        else {
+          setData(response.data);
+        }
       })
       .catch((error) => {
         console.log(error.message);
