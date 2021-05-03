@@ -3,7 +3,7 @@ import React from "react";
 import InitialPage from "../Pages/InitialPage";
 import LoginPage from "../Pages/LoginPage";
 import SignUpPage from "../Pages/SignUpPage";
-import FeedPage from "../Pages/FeedPage";
+import FeedPage from "../Pages/Feed/FeedPage";
 import ProfilePage from "../Pages/ProfilePage";
 import AddressPage from "../Pages/AddressPage";
 import RestaurantPage from "../Pages/RestaurantPage";
