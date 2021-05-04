@@ -17,7 +17,7 @@ export const DivInput = styled.div`
   position: relative;
 `
 
-export const Img = styled.img`
+export const ImgSearch = styled.img`
   width: 24px;
   height: 24px;
   position: absolute;
@@ -36,4 +36,38 @@ export const Input = styled.input`
   :focus,:hover{
     border: 1px solid #C7C7CC;
   }
+`
+
+export const DivBack = styled.div`
+  width: 360px;
+  height: 64px;
+  box-sizing: border-box;
+  padding: 0px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  >div{
+    width: 23px;
+    height: 24px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+`
+
+export const ImgBack = styled.img`
+  width: 23px;
+  height: 24px;
+  //margin-top: 30px;
+  //margin-bottom: 25px;
+  cursor: pointer;
+`
+
+export const P = styled.p`
+  width: 175px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 `
