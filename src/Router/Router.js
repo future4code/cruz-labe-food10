@@ -9,6 +9,7 @@ import AddressPage from "../Pages/AddressPage";
 import RestaurantPage from "../Pages/Restaurant/RestaurantPage";
 import EditProfilePage from "../Pages/EditProfilePage";
 import EditAddressPage from "../Pages/EditAddressPage";
+import CartPage from "../Pages/CartPage/CartPage";
 
 export default function Router() {
   return (
@@ -23,6 +24,7 @@ export default function Router() {
         <Route exact path="/update_address" component={EditAddressPage} />
         <Route exact path="/restaurant/:id" component={RestaurantPage} />
         <Route exact path="/address_form" component={AddressPage} />
+        <Route exact path="/cart" component={CartPage} />
       </Switch>
     </BrowserRouter>
   );
