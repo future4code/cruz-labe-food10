@@ -1,13 +1,15 @@
 import React from 'react'
 import useRequestData from "../../Hooks/useRequestData";
 import {All, Content, Img, Name, Text} from "./styled";
+import {useHistory} from 'react-router-dom'
 
 export default function CardRestaurant({id, page}){
   const [restaurant] = useRequestData(`/restaurants/${id}`, null, 'restaurant')
+  const history = useHistory()
 
   return(
     restaurant ?(
-    <All>
+    <All onClick={()=>history.push(`/restaurant/${id}`)}>
       <Content page={page}>
         {(page==='Feed'||page==='Restaurant') &&
           <Img src={restaurant.logoUrl} />
