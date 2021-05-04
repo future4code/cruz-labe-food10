@@ -7,6 +7,6 @@ export default function FeedPage() {
 
 
   return <>
-    <Search />
+    <Search restaurants={restaurants}/>
   </>
 }

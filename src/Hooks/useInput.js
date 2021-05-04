@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export function useInput(callback) {
+export function useInput() {
   const [value, setValue] = useState("");
 
   const handleInput = (e) => {
@@ -8,10 +8,6 @@ export function useInput(callback) {
       setValue(e.target.value);
     } else setValue("");
   };
-
-  useEffect(() => {
-    if (typeof callback === "function") callback();
-  }, [value]);
 
   return [value, handleInput];
 }
