@@ -6,9 +6,11 @@ export const All = styled.div`
   display: flex;
   align-items: center;
   overflow-x: auto;
+  box-sizing: border-box;
 `
 
 export const Button = styled.button`
   border: none;
   color: ${props=>props.active? '#E86E5A' : 'black'};
+  background-color: white;
 `

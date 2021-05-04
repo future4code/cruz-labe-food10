@@ -8,13 +8,17 @@ export const All = styled.div`
 `
 
 export const Content = styled.div`
-  width: 360px;
-  height: 640px;
-  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(415px, 100%);
+  height: min(800px, 100%);
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 `
 
 export const Header = styled.header`
-  width: 360px;
+  width: 100%;
   height: 178px;
   display: flex;
   flex-direction: column;
@@ -22,7 +26,7 @@ export const Header = styled.header`
 `
 
 export const Title = styled.div`
-  width: 360px;
+  width: 100%;
   height: 64px;
   box-sizing: border-box;
   display: flex;

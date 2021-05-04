@@ -1,25 +1,29 @@
 import styled from 'styled-components'
 
 export const All = styled.div`
-  width: ${props=>props.focus? '100vw' : '328px'};
-  height: ${props=>props.focus? '100vh' : '56px'};
+  width: ${props=>props.focus? '100vw' : '100%'};
+  height: ${props=>props.focus? '100vh' : 'auto'};
   position: ${props=>props.focus? 'fixed' : 'static'};
   top: 0px;
   left: 0px;
   display: flex;
   justify-content: center;
+  overflow-y: auto;
 `
 
 export const Content = styled.div`
-  width: ${props=>props.focus? '360px' : '328px'};
-  height: ${props=>props.focus? '640px' : '56px'};
+  width: min(415px, 100%);
+  height: ${props=>props.focus? 'min(800px, 100%)' : '56px'};
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 `
 
 export const DivInput = styled.div`
-  width: 328px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 16px;
   height: 56px;
   position: relative;
 `
@@ -29,7 +33,7 @@ export const ImgSearch = styled.img`
   height: 24px;
   position: absolute;
   top: 16px;
-  left: 17px;
+  left: 33px;
 `
 
 export const Input = styled.input`
@@ -46,8 +50,9 @@ export const Input = styled.input`
 `
 
 export const DivBack = styled.div`
-  width: 360px;
+  width: 100%;
   height: 64px;
+  border-bottom: 1px solid #b8b8b8;
   box-sizing: border-box;
   padding: 0px 16px;
   margin-bottom: 8px;
@@ -67,8 +72,6 @@ export const DivBack = styled.div`
 export const ImgBack = styled.img`
   width: 23px;
   height: 24px;
-  //margin-top: 30px;
-  //margin-bottom: 25px;
   cursor: pointer;
 `
 
