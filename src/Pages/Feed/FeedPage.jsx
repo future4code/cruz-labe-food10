@@ -6,6 +6,9 @@ import Filter from "./Filter/Filter";
 export default function FeedPage() {
   const [restaurants] = useRequestData('/restaurants', [], 'restaurants')
   const [restaurantsFilter, setRestaurantsFilter] = useState([]);
+  const [activeOrder] = useRequestData('/active-order',{}, 'order')
+
+  console.log('activeOrder', activeOrder)
 
   return <>
     <Search restaurants={restaurants}/>
