@@ -1,11 +1,18 @@
 import styled from 'styled-components'
 
 export const All = styled.div`
+  width: ${props=>props.focus? '100vw' : '328px'};
+  height: ${props=>props.focus? '100vh' : '56px'};
+  position: ${props=>props.focus? 'fixed' : 'static'};
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+`
+
+export const Content = styled.div`
   width: ${props=>props.focus? '360px' : '328px'};
   height: ${props=>props.focus? '640px' : '56px'};
-  position: ${props=>props.focus? 'fixed' : 'relative'};
-  top:0px;
-  left: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,6 +51,8 @@ export const DivBack = styled.div`
   box-sizing: border-box;
   padding: 0px 16px;
   margin-bottom: 8px;
+  position: sticky;
+  top: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {ImgSearch, DivInput, Input, All, DivBack, ImgBack, P} from "./styled";
+import {ImgSearch, DivInput, Input, All, DivBack, ImgBack, P, Content} from "./styled";
 import iconSearch from '../../../Assets/Img/search.svg'
 import {useInput} from "../../../Hooks/useInput";
 import iconBack from '../../../Assets/Img/back.svg'
@@ -26,28 +26,30 @@ export default function Search({restaurants}){
 
   return(
     <All focus={focus}>
-      {focus &&
-        <DivBack>
-          <ImgBack src={iconBack} onClick={()=>setFocus(false)}/>
-          <P>Busca</P>
-          <div></div>
-        </DivBack>
-      }
-      <DivInput>
-        <ImgSearch src={iconSearch} />
-        <Input
-          placeholder={'Restaurante'}
-          onFocus={()=>setFocus(true)}
-          // onBlur={()=>setFocus(false)}
-          value={input}
-          onChange={setInput}
-        />
-      </DivInput>
-      {focus &&
-        <>
-          {render}
-        </>
-      }
+      <Content focus={focus}>
+        {focus &&
+          <DivBack>
+            <ImgBack src={iconBack} onClick={()=>setFocus(false)}/>
+            <P>Busca</P>
+            <div></div>
+          </DivBack>
+        }
+        <DivInput>
+          <ImgSearch src={iconSearch} />
+          <Input
+            placeholder={'Restaurante'}
+            onFocus={()=>setFocus(true)}
+            // onBlur={()=>setFocus(false)}
+            value={input}
+            onChange={setInput}
+          />
+        </DivInput>
+        {focus &&
+          <>
+            {render}
+          </>
+        }
+      </Content>
     </All>
   )
 }
