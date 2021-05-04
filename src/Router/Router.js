@@ -6,7 +6,7 @@ import SignUpPage from "../Pages/SignUpPage";
 import FeedPage from "../Pages/Feed/FeedPage";
 import ProfilePage from "../Pages/ProfilePage";
 import AddressPage from "../Pages/AddressPage";
-import RestaurantPage from "../Pages/RestaurantPage";
+import RestaurantPage from "../Pages/Restaurant/RestaurantPage";
 import EditProfilePage from "../Pages/EditProfilePage";
 import EditAddressPage from "../Pages/EditAddressPage";
 
