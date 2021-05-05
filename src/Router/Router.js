@@ -1,14 +1,13 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import React from "react";
-import InitialPage from "../Pages/InitialPage";
-import LoginPage from "../Pages/LoginPage";
-import SignUpPage from "../Pages/SignUpPage";
+import InitialPage from "../Pages/InitialPage/InitialPage";
+import LoginPage from "../Pages/LoginPage/LoginPage";
+import SignUpPage from "../Pages/SignUpPage/SignUpPage";
 import FeedPage from "../Pages/Feed/FeedPage";
-import ProfilePage from "../Pages/ProfilePage";
-import AddressPage from "../Pages/AddressPage";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage";
+import AddressPage from "../Pages/AddressPage/AddressPage";
 import RestaurantPage from "../Pages/Restaurant/RestaurantPage";
-import EditProfilePage from "../Pages/EditProfilePage";
-import EditAddressPage from "../Pages/EditAddressPage";
+import EditProfilePage from "../Pages/EditProfilePage/EditProfilePage";
 import CartPage from "../Pages/CartPage/CartPage";
 
 export default function Router() {
@@ -21,7 +20,6 @@ export default function Router() {
         <Route exact path="/feed" component={FeedPage} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/update_profile" component={EditProfilePage} />
-        <Route exact path="/update_address" component={EditAddressPage} />
         <Route exact path="/restaurant/:id" component={RestaurantPage} />
         <Route exact path="/address_form" component={AddressPage} />
         <Route exact path="/cart" component={CartPage} />
