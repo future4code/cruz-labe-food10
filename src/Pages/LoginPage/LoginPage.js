@@ -17,11 +17,6 @@ const LoginPage = () => {
   const initForm = { email: "", password: "" };
   const [form, onChange] = useForm(initForm);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    onChange(name, value);
-  };
-
   const getAddress = (token) => {
     api.defaults.headers.common["auth"] = token;
     api
@@ -67,7 +62,7 @@ const LoginPage = () => {
           type="email"
           name="email"
           value={form.email}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="E-mail"
           placeholder="email@email.com"
@@ -77,7 +72,7 @@ const LoginPage = () => {
           type="password"
           name="password"
           value={form.password}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Senha"
           placeholder="Mínimo 6 caracteres"

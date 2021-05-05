@@ -24,11 +24,6 @@ const SingUpPage = () => {
   };
   const [form, onChange] = useForm(initForm);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    onChange(name, value);
-  };
-
   const signingUpUser = (event) => {
     if (form.password !== form.confirmPassword) {
       alert("As senhas não são iguais. Tente novamente.");
@@ -64,7 +59,7 @@ const SingUpPage = () => {
           type="text"
           name="usuario"
           value={form.usuario}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Nome Completo"
           pattern="\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{1,19}\b"
@@ -74,7 +69,7 @@ const SingUpPage = () => {
           type="email"
           name="email"
           value={form.email}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="E-mail"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -84,7 +79,7 @@ const SingUpPage = () => {
           type="number"
           name="cpf"
           value={form.cpf}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="CPF"
           pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}"
@@ -94,7 +89,7 @@ const SingUpPage = () => {
           type="password"
           name="password"
           value={form.password}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Senha"
           pattern="^.{6,}$"
@@ -104,7 +99,7 @@ const SingUpPage = () => {
           type="password"
           name="confirmPassword"
           value={form.confirmPassword}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Confirmar"
           pattern="^.{6,}$"
