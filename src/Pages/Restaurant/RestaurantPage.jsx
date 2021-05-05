@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
-import { DivBack, ImgBack, P, Card, Img, Container } from "./styles";
+import { DivBack, ImgBack, P } from "./styles";
 import iconBack from "../../Assets/Img/back.svg";
+import Loading from '../../Components/Loading/Loading'
 import axios from "axios";
 import CardProduct from "../../Components/CardProduct/CardProduto";
 
@@ -87,7 +88,7 @@ export default function RestaurantPage() {
         <div></div>
       </DivBack>
       <CardRestaurant id={params.id} page={"Restaurant"} />
-      {restaurantDetails ? renderCategories : <div>Carregando...</div>}
+      {restaurantDetails ? renderCategories : <Loading/>}
     </>
   );
 }
