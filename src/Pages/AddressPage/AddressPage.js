@@ -23,11 +23,6 @@ const AddressPage = () => {
       };
   const [form, onChange] = useForm(initForm);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    onChange(name, value);
-  };
-
   const addAdress = (event) => {
     localStorage.setItem("address", JSON.stringify(form));
     api.defaults.headers.common["auth"] = localStorage.getItem("token");
@@ -55,7 +50,7 @@ const AddressPage = () => {
           type="text"
           name="street"
           value={form.street}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Logradouro"
           placeholder="Rua / Av."
@@ -64,7 +59,7 @@ const AddressPage = () => {
           type="number"
           name="number"
           value={form.number}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Número"
           placeholder="Número"
@@ -73,7 +68,7 @@ const AddressPage = () => {
           type="text"
           name="complement"
           value={form.complement}
-          onChange={handleChange}
+          onChange={onChange}
           label="Complemento"
           placeholder="Apto. / Bloco"
         />
@@ -81,7 +76,7 @@ const AddressPage = () => {
           type="text"
           name="neighbourhood"
           value={form.neighbourhood}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Bairro"
           placeholder="Bairro"
@@ -90,7 +85,7 @@ const AddressPage = () => {
           type="text"
           name="city"
           value={form.city}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Cidade"
           placeholder="Cidade"
@@ -99,7 +94,7 @@ const AddressPage = () => {
           type="text"
           name="state"
           value={form.state}
-          onChange={handleChange}
+          onChange={onChange}
           required
           label="Estado"
           placeholder="Estado"
