@@ -3,11 +3,12 @@ import React from "react";
 import InitialPage from "../Pages/InitialPage/InitialPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import SignUpPage from "../Pages/SignUpPage/SignUpPage";
-import FeedPage from "../Pages/FeedPage/FeedPage";
+import FeedPage from "../Pages/Feed/FeedPage";
 import ProfilePage from "../Pages/ProfilePage/ProfilePage";
 import AddressPage from "../Pages/AddressPage/AddressPage";
-import RestaurantPage from "../Pages/RestaurantPage/RestaurantPage";
+import RestaurantPage from "../Pages/Restaurant/RestaurantPage";
 import EditProfilePage from "../Pages/EditProfilePage/EditProfilePage";
+import CartPage from "../Pages/CartPage/CartPage";
 
 export default function Router() {
   return (
@@ -21,6 +22,7 @@ export default function Router() {
         <Route exact path="/update_profile" component={EditProfilePage} />
         <Route exact path="/restaurant/:id" component={RestaurantPage} />
         <Route exact path="/address_form" component={AddressPage} />
+        <Route exact path="/cart" component={CartPage} />
       </Switch>
     </BrowserRouter>
   );
