@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {ImgSearch, DivInput, Input, All, DivBack, ImgBack, P, Content} from "./styled";
+import {ImgSearch, DivInput, Input, All, DivBack, ImgBack, P, Content, ContentRestaurant} from "./styled";
 import iconSearch from '../../../Assets/Img/search.svg'
 import {useInput} from "../../../Hooks/useInput";
 import iconBack from '../../../Assets/Img/back.svg'
+import CardRestaurant from "../../../Components/CardRestaurant/CardRestaurant";
 
 export default function Search({restaurants}){
   const [focus, setFocus] = useState(false);
@@ -11,25 +12,39 @@ export default function Search({restaurants}){
 
   useEffect(()=>{
     setTimeout(()=>{
+      const newRender = []
       if(input.length>0) {
-        const newRender = []
         for(const restaurant of restaurants){
           if(restaurant.name.toLowerCase().includes(input.toLowerCase())){
-            newRender.push(<div key={restaurant.id}>{restaurant.name}</div>)
+            newRender.push(
+              <CardRestaurant page={'Feed'} id={restaurant.id} key={restaurant.id}/>
+            )
           }
         }
         if(newRender.length===0)newRender.push(<div key={1}>Não encontramos o restaurante :(</div>)
         setRender(newRender)
       }
+      else{
+        newRender.push(
+          <></>
+        )
+        setRender(newRender)
+      }
     }, 500)
+    console.log('input', input)
   },[input])
+
+  const clickBack = ()=>{
+    setFocus(false)
+    setInput('')
+  }
 
   return(
     <All focus={focus}>
       <Content focus={focus}>
         {focus &&
           <DivBack>
-            <ImgBack src={iconBack} onClick={()=>setFocus(false)}/>
+            <ImgBack src={iconBack} onClick={clickBack}/>
             <P>Busca</P>
             <div></div>
           </DivBack>
@@ -45,9 +60,9 @@ export default function Search({restaurants}){
           />
         </DivInput>
         {focus &&
-          <>
+          <ContentRestaurant>
             {render}
-          </>
+          </ContentRestaurant>
         }
       </Content>
     </All>
