@@ -6,8 +6,10 @@ import ActiveOrder from "./ActiveOrder/ActiveOrder";
 import {All, Content, ContentRestaurant, Header, MyCircularProgress, Title} from "./styled";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import {StylesProvider} from '@material-ui/core/styles'
+import useAuthorization from "../../Hooks/useAuthetication";
 
 export default function FeedPage() {
+  useAuthorization()
   const [restaurants] = useRequestData('/restaurants', [], 'restaurants')
   const [restaurantsFilter, setRestaurantsFilter] = useState([]);
   const [loading, setLoading] = useState(true)
