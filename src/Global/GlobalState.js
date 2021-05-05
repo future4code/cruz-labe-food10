@@ -10,7 +10,7 @@ export const GlobalState = (props) => {
 
   return (
     <div>
-      <GlobalStateContext.Provider value={providerValue}>
+      <GlobalStateContext.Provider value={cart, setCart}>
         {props.children}
       </GlobalStateContext.Provider>
     </div>
