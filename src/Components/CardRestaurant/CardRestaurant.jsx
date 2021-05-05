@@ -1,34 +1,39 @@
 import React from 'react'
 import useRequestData from "../../Hooks/useRequestData";
+import {All, Content, Img, Name, Text} from "./styled";
+import {useHistory} from 'react-router-dom'
 
 export default function CardRestaurant({id, page}){
   const [restaurant] = useRequestData(`/restaurants/${id}`, null, 'restaurant')
-
-  console.log('restaurant', restaurant)
+  const history = useHistory()
 
   return(
     restaurant ?(
-    <>
-      {(page==='Feed'||page==='Restaurant') &&
-        <img src={restaurant.logoUrl} />
-      }
+    <All onClick={()=>history.push(`/restaurant/${id}`)}>
+      <Content page={page}>
+        {(page==='Feed'||page==='Restaurant') &&
+          <Img src={restaurant.logoUrl} />
+        }
 
-      <p>Nome:{restaurant.name}</p>
+        <Name page={page}>{restaurant.name}</Name>
 
-      {page==='Restaurant' &&
-        <p>{restaurant.category}</p>
-      }
+        {page==='Restaurant' &&
+          <Text>{restaurant.category}</Text>
+        }
 
-      {(page==='Feed'||page==='Restaurant')&&
-        <p>{restaurant.deliveryTime}min  Frete:R${restaurant.shipping}</p>
-      }
+        {(page!=='Cart')&&
+          <Text page={page}>{restaurant.deliveryTime}min  Frete:R${restaurant.shipping}</Text>
+        }
 
-      <p>{restaurant.address}</p>
+        {(page !== 'Feed') &&
+        <Text>{restaurant.address}</Text>
+        }
 
-      {page==='Cart' &&
-        <p>{restaurant.deliveryTime}min</p>
-      }
-    </>):(
+        {page==='Cart' &&
+          <Text>{restaurant.deliveryTime}min</Text>
+        }
+      </Content>
+    </All>):(
       <></>
     )
   )
