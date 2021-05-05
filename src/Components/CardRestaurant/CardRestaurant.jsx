@@ -15,17 +15,19 @@ export default function CardRestaurant({id, page}){
           <Img src={restaurant.logoUrl} />
         }
 
-        <Name>{restaurant.name}</Name>
+        <Name page={page}>{restaurant.name}</Name>
 
         {page==='Restaurant' &&
           <Text>{restaurant.category}</Text>
         }
 
-        {(page==='Feed'||page==='Restaurant')&&
-          <Text>{restaurant.deliveryTime}min  Frete:R${restaurant.shipping}</Text>
+        {(page!=='Cart')&&
+          <Text page={page}>{restaurant.deliveryTime}min  Frete:R${restaurant.shipping}</Text>
         }
 
+        {(page !== 'Feed') &&
         <Text>{restaurant.address}</Text>
+        }
 
         {page==='Cart' &&
           <Text>{restaurant.deliveryTime}min</Text>

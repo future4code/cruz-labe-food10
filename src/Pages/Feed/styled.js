@@ -1,10 +1,12 @@
 import styled from 'styled-components'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const All = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 `
 
 export const Content = styled.div`
@@ -41,4 +43,15 @@ export const Title = styled.div`
     justify-content: center;
     align-items: center;
   }
+`
+
+export const MyCircularProgress = styled(CircularProgress)`
+  color:#ec3d47;
+`
+
+export const ContentRestaurant = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
