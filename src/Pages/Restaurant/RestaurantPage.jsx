@@ -58,7 +58,18 @@ export default function RestaurantPage() {
     alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
     setSelection(1)
   };
-console.log(cart)
+  const removeItemFromCart = (itemToRemove) => {
+    const index = cart.findIndex((item) => item.id === itemToRemove.id);
+    let newCart = [...cart];
+    if (newCart[index].amount === 1) {
+      newCart.splice(index, 1);
+    } else {
+      newCart[index].amount -= 1;
+    }
+    setCart(newCart);
+
+    
+  };
   
   const renderCategories = categories.map((category) => {
     return (
@@ -77,6 +88,7 @@ console.log(cart)
                   photo={item.photoUrl}
                   category={item.category}
                   addItemToCart={() => addItemToCart(item)}
+                  removeItemFromCart={() => removeItemFromCart(item)}
                 />
               );
             }

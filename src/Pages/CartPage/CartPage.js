@@ -28,18 +28,7 @@ export default function CartPage() {
         alert("erro ao tentar pegar o endereço");
       });
   };
-  const removeItemFromCart = (itemToRemove) => {
-    const index = cart.findIndex((item) => item.id === itemToRemove.id);
-    let newCart = [...cart];
-    if (newCart[index].amount === 1) {
-      newCart.splice(index, 1);
-    } else {
-      newCart[index].amount -= 1;
-    }
-    setCart(newCart);
-
-    
-  };
+  
   console.log(cart)
   return (
     <div>
@@ -57,7 +46,7 @@ export default function CartPage() {
             price={item.price}
             photo={item.photoUrl}
             category={item.category}
-            removeItemFromCart={() => removeItemFromCart(item)}
+           
           />
          );
       })}
