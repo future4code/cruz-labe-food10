@@ -34,3 +34,4 @@ export const P = styled.p`
   justify-content: center;
   font-size: 16px;
 `
+
