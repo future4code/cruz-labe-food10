@@ -1,3 +1,4 @@
+
 export const goToInitialPage = (history) => {
   history.push("/");
 };
@@ -13,6 +14,10 @@ export const goToSignUpPage = (history) => {
 export const goToFeedPage = (history) => {
   history.push("/feed");
 };
+
+export const goToCart = (history) =>{
+  history.push("/cart")
+}
 
 export const goToProfilePage = (history) => {
   history.push("/profile");

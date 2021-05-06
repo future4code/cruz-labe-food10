@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import {Card, Img, Container} from "./styles"
-
+import AlertDialog from "../AlertDialog"
 
 function CardProduct(props) {
-  const [cart, setCart] = useState([])
-   const addItemToCart = ()=>{
-    const index = cart.findIndex((i) => i.id === newItem.id);
-    let newCart = [...cart];
-    if (index === -1) {
-      newCart.push({ ...newItem, amount: 1 });
-    } else {
-      newCart[index].amount += 1;
-    }
-    setCart(newCart);
-   }
-  // const changeButtonAddRemover = () =>{
-  //   const index = cart
-  // }
+  const [open, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
   return (
       <div>
          <Card>
@@ -27,6 +22,8 @@ function CardProduct(props) {
                 <div>{props.name}</div>
                 <div>{props.description}</div>
                 <div>{props.price.toFixed(2)}</div>
+                <button onClick={handleClickOpen}>Adicionar</button>
+                <AlertDialog handleClose={handleClose} addItemToCart={props.addItemToCart} open={open} />
               </div>
             </Card>
       </div>
