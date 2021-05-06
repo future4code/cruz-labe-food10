@@ -51,6 +51,7 @@ export default function CartPage() {
          return (
           <CardProduct
             key={item.id}
+            id={item.id}
             name={item.name}
             description={item.description}
             price={item.price}
