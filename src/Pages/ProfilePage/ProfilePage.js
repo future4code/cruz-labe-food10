@@ -33,8 +33,7 @@ const ProfilePage = () => {
       axios
         .get(`${BASE_URL}/profile`, {
           headers: {
-            // auth: localStorage.getItem('token')
-            auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFUMEVHclRKWmJST3FNeHdUc0hjIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDE2MDkzNn0.-ubAiJ4H374qzPYCCZAFpePv9-NyBJiC4dYPKiDZlLc"
+            auth: localStorage.getItem('token')
           }
         })
         .then((res) => {
