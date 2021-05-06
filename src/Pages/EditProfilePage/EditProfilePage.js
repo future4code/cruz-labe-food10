@@ -23,22 +23,26 @@ const EditProfilePage = () => {
   // useAuthorization()
   const classes = useStyles()
   const history = useHistory()
-  const [form, onChange, clear] = useForm({name: "", email: "", cpf: ""})
-  const [profileInfo, setProfileInfo] = useState({})
-
+  const [form, onChange, clear, setAll] = useForm({name: "", email: "", cpf: ""})
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getProfileInfo = () => {
       axios
         .get(`${BASE_URL}/profile`, {
           headers: {
-            // auth: localStorage.getItem('token')
-            auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFUMEVHclRKWmJST3FNeHdUc0hjIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDE2MDkzNn0.-ubAiJ4H374qzPYCCZAFpePv9-NyBJiC4dYPKiDZlLc"
+            auth: localStorage.getItem('token')
           }
         })
         .then((res) => {
-          console.log(res.data)
-          setProfileInfo(res.data.user)
+          console.log('user',res.data.user)
+          const obj = res.data.user
+          setAll({
+            name:obj.name,
+            email:obj.email,
+            cpf: obj.cpf
+          })
+          setLoading(false)
         })
         .catch((err) => console.log(err))
     };
@@ -89,17 +93,17 @@ const EditProfilePage = () => {
         <form onSubmit={onSubmitForm}>
           <TextField
             name={"name"}
-            // value={form.name}
+            value={form.name}
             onChange={onChange}
             label={"Nome"}
             variant="outlined"
             fullWidth
             margin={"normal"}
             required
-            defaultValue={profileInfo.name}
             type={"text"}
             inputProps={{ pattern: "(.*[a-z]){2}" }}
             title={"Digite o nome corretamente"}
+            disabled={loading}
           />
           <TextField
             name={"email"}
@@ -110,10 +114,10 @@ const EditProfilePage = () => {
             fullWidth
             margin={"normal"}
             required
-            defaultValue="Hello World"
             type={"email"}
             inputProps={{ pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$" }}
             title={"Digite o e-mail corretamente"}
+            disabled={loading}
           />
           <TextField
             name={"cpf"}
@@ -130,6 +134,7 @@ const EditProfilePage = () => {
                 "([0-9]{2}[.]?[0-9]{3}[.[0-9]{3}[/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[.][0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2})",
             }}
             title={"Digite o CPF corretamente"}
+            disabled={loading}
           />
           <ThemeProvider theme={theme}>
           <Button

@@ -12,5 +12,9 @@ export const useForm = (initState) => {
     setForm(initState)
   }
 
-  return [form, onChange, clear];
+  const setAll = (state)=>{
+    setForm(state)
+  }
+
+  return [form, onChange, clear, setAll];
 };
