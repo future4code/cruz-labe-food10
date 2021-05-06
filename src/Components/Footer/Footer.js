@@ -7,6 +7,9 @@ import {
   goToFeedPage,
   goToProfilePage,
 } from "../../Coordination/coordinator";
+import Avatar from '../../Assets/Img/avatar.svg'
+import Shopping_cart from '../../Assets/Img/shopping-cart.svg'
+import Homepage from '../../Assets/Img/homepage.svg'
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -35,14 +38,14 @@ function Footer() {
       className={classes.root}
     >
       <BottomNavigationAction
-        icon={<HomeOutlinedIcon onClick={() => goToFeedPage(history)} />}
+       icon={<img  src={Homepage} onClick={() => goToFeedPage(history)} />}
       />
       <BottomNavigationAction
-        icon={<ShoppingCartOutlinedIcon onClick={() => goToCart(history)} />}
+        icon={<img  src={Shopping_cart} onClick={() => goToCart(history)} />}
       />
       <BottomNavigationAction
         icon={
-          <PersonOutlineOutlinedIcon onClick={() => goToProfilePage(history)} />
+          <img  src={Avatar} onClick={() => goToProfilePage(history)} />
         }
       />
     </BottomNavigation>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import useAuthentication from '../../Hooks/useAuthetication'
 import axios from "axios"
 import { BASE_URL } from "../../constants/url"
@@ -12,6 +12,7 @@ import { Title, OrderTitle, AddressContainer,
   FooterContainer, HistoryOrderTitle, 
   FooterImgContainer, FooterImg, OrderHistoryCard,
   OrderHistoryContainer } from './styled'
+import GlobalStateContext from "../../Global/GlobalStateContext";
 import { EditImg } from './styled'
 import { useHistory } from "react-router-dom"
 import {
@@ -25,25 +26,9 @@ import {
 const ProfilePage = () => {
   useAuthentication()
   const history = useHistory()
-  const [profile, setProfile] = useState({})
+  const {profile, setProfile} = useContext(GlobalStateContext)
   const [order, setOrder] = useState({})
 
-  useEffect(() => {
-    const getProfile = () => {
-      axios
-        .get(`${BASE_URL}/profile`, {
-          headers: {
-            auth: localStorage.getItem('token')
-          }
-        })
-        .then((res) => {
-          console.log(res.data)
-          setProfile(res.data.user)
-        })
-        .catch((err) => console.log(err))
-    };
-    getProfile()
-  }, [])
 
   useEffect(() => {
     const ordersHistory = () => {
@@ -72,7 +57,6 @@ const ProfilePage = () => {
       </TitleContainer>
       <ProfileContainer>
         <p>
-          {" "}
           {profile.name}
           <EditImg
             src={edit}
@@ -117,15 +101,15 @@ const ProfilePage = () => {
         {profile ? (
           <FooterImgContainer>
             <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
-            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart()} />
-            <FooterImg src={avatar_on} alt={"perfil"} onCLick={() => goToProfilePage()}/>
+            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
+            <FooterImg src={avatar_on} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
           </FooterImgContainer>
         ) : 
         (
           <FooterImgContainer>
             <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
-            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart()} />
-            <FooterImg src={avatar} alt={"perfil"} onCLick={() => goToProfilePage()}/>
+            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
+            <FooterImg src={avatar} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
           </FooterImgContainer>
         )}
         Footer
