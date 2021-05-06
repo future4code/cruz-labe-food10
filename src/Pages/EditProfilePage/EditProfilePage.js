@@ -55,15 +55,13 @@ const EditProfilePage = () => {
     addAddress(form, clear)
   }
 
-   const addAddress = (body, history) => {
+   const addAddress = (body) => {
     axios.put(`${BASE_URL}/profile`, body, {
         headers: {
-            // auth: localStorage.setItem("token")
-            auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFUMEVHclRKWmJST3FNeHdUc0hjIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDE2MDkzNn0.-ubAiJ4H374qzPYCCZAFpePv9-NyBJiC4dYPKiDZlLc"
+            auth: localStorage.getItem("token")
         }
     })
     .then((res) => {
-      clear()
       alert("Cadastro editado com sucesso!")
       goToProfilePage(history)
     })
