@@ -5,6 +5,8 @@ import { DivBack, ImgBack, P } from "./styles";
 import iconBack from "../../Assets/Img/back.svg";
 import Loading from '../../Components/Loading/Loading'
 import axios from "axios";
+import GlobalStateContext from "../../Global/GlobalStateContext";
+import Footer from '../../Components/Footer/Footer'
 import CardProduct from "../../Components/CardProduct/CardProduto";
 
 export default function RestaurantPage() {
@@ -12,7 +14,9 @@ export default function RestaurantPage() {
   const history = useHistory();
   const [restaurantDetails, setRestaurantDetails] = useState({});
   const [categories, setCategories] = useState([]);
-
+  const {cart, setCart} = useContext(GlobalStateContext)
+  const {selection, setSelection} = useContext(GlobalStateContext)
+   
   useEffect(() => {
     getRestaurantDetails(params.id);
   }, [params.id]);
@@ -31,6 +35,7 @@ export default function RestaurantPage() {
         alert(err);
       });
   };
+  
 
   useEffect(() => {
     if (restaurantDetails && restaurantDetails.products) {
@@ -44,18 +49,17 @@ export default function RestaurantPage() {
     }
   }, [restaurantDetails]);
 
-  // const cartItem = restaurantDetails.products && restaurantDetails.products.map((item) => {
-  //     return (
-  //       <CardProduct
-  //         key={item.id}
-  //         name={item.name}
-  //         description={item.description}
-  //         price={item.price}
-  //         photo={item.photoUrl}
-  //         category={item.category}
-  //       />
-  //     );
-  //   });
+
+  const addItemToCart = (newItem) => {
+    let newCart = [...cart];
+
+    newCart.push({ ...newItem, amount: selection });
+    setCart(newCart);
+    alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
+    setSelection(1)
+  };
+console.log(cart)
+  
   const renderCategories = categories.map((category) => {
     return (
       <div>
@@ -71,6 +75,7 @@ export default function RestaurantPage() {
                   price={item.price}
                   photo={item.photoUrl}
                   category={item.category}
+                  addItemToCart={() => addItemToCart(item)}
                 />
               );
             }
@@ -89,6 +94,7 @@ export default function RestaurantPage() {
       </DivBack>
       <CardRestaurant id={params.id} page={"Restaurant"} />
       {restaurantDetails ? renderCategories : <Loading/>}
+      <Footer/>
     </>
   );
 }

@@ -2,15 +2,16 @@ import GlobalStateContext from "./GlobalStateContext";
 import React, { useState, useEffect } from "react";
 
 export const GlobalState = (props) => {
-  const [cart, setCart] = useState()
+  const [cart, setCart] = useState([])
+  const [selection, setSelection] = useState(1);
 
   const providerValue = {
-   cart, setCart
+   cart, setCart, selection, setSelection
   };
 
   return (
     <div>
-      <GlobalStateContext.Provider value={cart, setCart}>
+      <GlobalStateContext.Provider value={providerValue}>
         {props.children}
       </GlobalStateContext.Provider>
     </div>
