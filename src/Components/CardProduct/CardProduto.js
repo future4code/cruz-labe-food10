@@ -1,37 +1,59 @@
-import React, { useState, } from 'react';
-import {Card, Img, Container} from "./styles"
-import AlertDialog from "../AlertDialog"
-
+import React, { useState } from "react";
+import {
+  Card,
+  Img,
+  AmountBox,
+  ProductTitle,
+  ProductText,
+  ProductDescription,
+  ProductContainer,
+  AmountContent,
+  ProductInfo,
+  ImgContent,
+} from "./styles";
+import AlertDialog from "../AlertDialog";
+import Button from "@material-ui/core/Button";
+import DialogActions from "@material-ui/core/DialogActions";
 
 function CardProduct(props) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
-  
-  
-    
+    setOpen(false);
+  };
 
   return (
-      <div>
-         <Card>
-              <div>
-                <Img src={props.photoUrl} />
-              </div>
-              <div>
-              {props.amount}
-                <div>{props.name}</div>
-                <div>{props.description}</div>
-                <div>{props.price.toFixed(2)}</div>
-                <AlertDialog handleClose={handleClose} addItemToCart={props.addItemToCart}  id={props.id} removeItemFromCart={props.removeItemFromCart} open={open} />
-              </div>
-            </Card>
-      </div>
+    <div>
+      <Card>
+          <Img background={props.photoUrl} />
+        <ProductInfo>
+          {props.amount ? (
+            <AmountBox>
+              <AmountContent >{props.amount}</AmountContent>
+            </AmountBox>
+          ) : (
+            <div></div>
+          )}
+          <ProductDescription>
+            <ProductTitle>{props.name}</ProductTitle>
+            <ProductText>{props.description}</ProductText>
+            <span>R${props.price.toFixed(2)}</span>
+          </ProductDescription>
+
+          <AlertDialog
+            handleClose={handleClose}
+            addItemToCart={props.addItemToCart}
+            id={props.id}
+            removeItemFromCart={props.removeItemFromCart}
+            open={open}
+          />
+        </ProductInfo>
+      </Card>
+    </div>
   );
 }
 

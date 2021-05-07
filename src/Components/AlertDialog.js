@@ -12,17 +12,19 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
 import styled from "styled-components";
-import GlobalStateContext from '../Global/GlobalStateContext'
+import GlobalStateContext from "../Global/GlobalStateContext";
+import theme from "../constants/themes";
+import { ThemeProvider } from "@material-ui/core/styles";
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 export default function AlertDialog(props) {
-  const [findCart, setFindCart] = useState()
+  const [findCart, setFindCart] = useState();
   const { cart, setCart } = useContext(GlobalStateContext);
   const [open, setOpen] = React.useState(false);
-  const {selection, setSelection} = useContext(GlobalStateContext)
-
+  const { selection, setSelection } = useContext(GlobalStateContext);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,30 +42,32 @@ export default function AlertDialog(props) {
     handleClose();
     props.addItemToCart();
   };
-  const handleRemove = () =>{
+  const handleRemove = () => {
     props.removeItemFromCart();
-  }
-  const changeButton = () =>{
-    const findArray = cart.find(card => card.id === props.id);
+  };
+  const changeButton = () => {
+    const findArray = cart.find((card) => card.id === props.id);
     setFindCart(findArray);
-  }
-  useEffect(()=>{
-    changeButton()
-  },[cart])
-  
+  };
+  useEffect(() => {
+    changeButton();
+  }, [cart]);
+
   return (
     <div>
-      <ButtonContainer>
-       { findCart ? (
-        <Button variant="outlined" color="secondary" onClick={handleRemove}>
-        REMOVER
-      </Button>
-       ): (
-       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-       ADICIONAR
-     </Button>)
-       } 
-      </ButtonContainer>
+      <ThemeProvider theme={theme}>
+        <ButtonContainer>
+          {findCart ? (
+            <Button variant="outlined" color="primary" onClick={handleRemove}>
+              REMOVER
+            </Button>
+          ) : (
+            <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+              ADICIONAR
+            </Button>
+          )}
+        </ButtonContainer>
+      </ThemeProvider>
 
       <Dialog
         open={open}
@@ -82,41 +86,42 @@ export default function AlertDialog(props) {
         </DialogTitle>
 
         <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          <FormControl fullWidth variant="outlined">
-            <InputLabel htmlFor="outlined-age-native-simple">
-              Quantidade
-            </InputLabel>
-            <Select
-              required
-              onChange={handleSelect}
-              value={selection}
-              label="Quantidade"
-            >
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={6}>6</MenuItem>
-              <MenuItem value={7}>7</MenuItem>
-              <MenuItem value={8}>8</MenuItem>
-              <MenuItem value={9}>9</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={11}>11</MenuItem>
-              <MenuItem value={12}>12</MenuItem>
-              <MenuItem value={13}>13</MenuItem>
-              <MenuItem value={14}>14</MenuItem>
-              <MenuItem value={15}>15</MenuItem>
-            </Select>
-          </FormControl>
-
+          <DialogContentText id="alert-dialog-description">
+            <FormControl fullWidth variant="outlined">
+              <InputLabel htmlFor="outlined-age-native-simple">
+                Quantidade
+              </InputLabel>
+              <Select
+                required
+                onChange={handleSelect}
+                value={selection}
+                label="Quantidade"
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={9}>9</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={11}>11</MenuItem>
+                <MenuItem value={12}>12</MenuItem>
+                <MenuItem value={13}>13</MenuItem>
+                <MenuItem value={14}>14</MenuItem>
+                <MenuItem value={15}>15</MenuItem>
+              </Select>
+            </FormControl>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleAddToCart} color="secondary" autoFocus>
+          <ThemeProvider theme={theme}>
+          <Button onClick={handleAddToCart} color="primary" autoFocus>
             ADICIONAR AO CARRINHO
           </Button>
+          </ThemeProvider>
         </DialogActions>
       </Dialog>
     </div>

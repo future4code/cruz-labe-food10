@@ -1,12 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import CardProduct from "../../Components/CardProduct/CardProduto";
-import { Card, Img, AddressTitle, AddressContainer } from "./styles";
+import { Card, Img, DivBack, ImgBack, P,AddressTitle, AddressContainer } from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
+import { useHistory, useParams} from 'react-router-dom';
+import iconBack from "../../Assets/Img/back.svg";
 import Footer from "../../Components/Footer/Footer";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import theme from "../../constants/themes";
+import { ThemeProvider } from "@material-ui/core/styles";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CartPage() {
+  const params = useParams();
+  const history = useHistory();
   const { cart, removeItemFromCart } = useContext(GlobalStateContext);
   const [price, setPrice] = useState([]);
   const { profile} = useContext(GlobalStateContext);
@@ -61,7 +68,12 @@ export default function CartPage() {
 
   return (
     <div>
-      <h1> Carrinho</h1>
+      <DivBack>
+        <ImgBack src={iconBack} onClick={() => history.goBack()} />
+        <P>Carrinho</P>
+        <div></div>
+      </DivBack>
+      <CardRestaurant id={params.id} page={"Cart"} />
       <div>
         <AddressContainer>
           <AddressTitle>Endereço Entrega</AddressTitle>
@@ -87,9 +99,11 @@ export default function CartPage() {
         <h2>TOTAL</h2>
         {cart.length > 0 ? price : <div> Carrinho Vazio</div>}
       </div>
-      <Button variant="contained" color="secondary">
+      <ThemeProvider theme={theme}>
+      <Button variant="contained" color="primary">
         CONFIRMAR
       </Button>
+      </ThemeProvider>
       <div>
         <h1>Colocar espaço aqui</h1>
       </div>

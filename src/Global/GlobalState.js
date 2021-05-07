@@ -7,7 +7,7 @@ export const GlobalState = (props) => {
   const [cart, setCart] = useState([]);
   const [selection, setSelection] = useState(1);
   const [profile, setProfile] = useState({});
-  
+
   useEffect(() => {
     const getProfile = () => {
       axios
@@ -36,6 +36,7 @@ export const GlobalState = (props) => {
     setCart(newCart);
   };
 
+  
   const providerValue = {
     cart,
     setCart,

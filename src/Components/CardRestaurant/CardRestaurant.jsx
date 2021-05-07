@@ -29,7 +29,7 @@ export default function CardRestaurant({id, page}){
         <Text>{restaurant.address}</Text>
         }
 
-        {page==='Cart' &&
+        {page ==='Cart' &&
           <Text>{restaurant.deliveryTime}min</Text>
         }
       </Content>

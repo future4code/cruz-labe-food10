@@ -7,10 +7,10 @@ const theme = createMuiTheme({
             main: primaryColor,
             contrastText: 'black',
         },
-        // secondary: {
-        //     main: secondaryColor,
+        secondary: {
+            main: secondaryColor,
 
-        // },         
+        },         
         text: {
             primary: neutralColor
         }
