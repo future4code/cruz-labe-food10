@@ -11,13 +11,13 @@ import { Title, OrderTitle, AddressContainer,
   AddressTitle, TitleContainer, ProfileContainer, 
   FooterContainer, HistoryOrderTitle, 
   FooterImgContainer, FooterImg, OrderHistoryCard,
-  OrderHistoryContainer } from './styled'
-import GlobalStateContext from "../../Global/GlobalStateContext";
+  OrderHistoryContainer, HistoryContainer } from './styled'
 import { EditImg } from './styled'
+import OrderHistoryCards from '../../Components/OrderHistoryCards/OrderHistoryCards'
 import { useHistory } from "react-router-dom"
 import {
   goToEditProfilePage,
-  goToEditAddressPage,
+  goToAddressPage,
   goToFeedPage,
   goToCart,
   goToProfilePage
@@ -26,27 +26,57 @@ import {
 const ProfilePage = () => {
   useAuthentication()
   const history = useHistory()
-  const {profile, setProfile} = useContext(GlobalStateContext)
-  const [order, setOrder] = useState({})
-
+  const [profile, setProfile] = useState({})
+  const [orders, setOrders] = useState({})
 
   useEffect(() => {
     const ordersHistory = () => {
       axios
         .get(`${BASE_URL}/orders/history`, {
           headers: {
-            // auth: localStorage.getItem("token")
-            auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFUMEVHclRKWmJST3FNeHdUc0hjIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDE2MDkzNn0.-ubAiJ4H374qzPYCCZAFpePv9-NyBJiC4dYPKiDZlLc"
+            auth: localStorage.getItem("token")
           }
         })
         .then((res) => {
-          console.log(res.data);
-          setOrder(res.data.user);
+          console.log(res.data.orders);
+          setOrders(res.data);
         })
         .catch((err) => console.log(err));
     };
-    ordersHistory();
+    ordersHistory()
   }, []);
+
+  useEffect(() => {
+    const getProfile = () => {
+      axios
+        .get(`${BASE_URL}/profile`, {
+          headers: {
+            auth: localStorage.getItem('token')
+          }
+        })
+        .then((res) => {
+          console.log(res.data)
+          setProfile(res.data.user)
+        })
+        .catch((err) => console.log(err))
+    };
+    getProfile()
+  }, [])
+
+
+  const listOfOrders = orders && orders.orders && orders.orders.map((order) => {
+    console.log(order.restaurantName)
+    return (
+      <OrderHistoryCards
+      key={order.id}
+      restaurant={order.restaurantName}
+      created={order.createdAt}
+      expires={order.expiresAt}
+      total={order.totalPrice}
+      />
+    )
+  })
+
 
   return (
     <div>
@@ -57,6 +87,7 @@ const ProfilePage = () => {
       </TitleContainer>
       <ProfileContainer>
         <p>
+          {" "}
           {profile.name}
           <EditImg
             src={edit}
@@ -72,7 +103,7 @@ const ProfilePage = () => {
       <EditImg
             src={edit}
             alt={"editar"}
-            onClick={() => goToEditAddressPage(history)}
+            onClick={() => goToAddressPage(history)}
           />
         <AddressTitle>Endereço cadastrado</AddressTitle>
         <p>
@@ -84,15 +115,13 @@ const ProfilePage = () => {
         <OrderTitle>Histórico de pedidos</OrderTitle>
       </TitleContainer>
       {/* ProfileOrderCards - component*/}
-      <OrderHistoryContainer>
-        {order ? (
-          <AddressContainer>
+      <OrderHistoryContainer>{console.log(listOfOrders)}
+        {listOfOrders ? (
+          <HistoryContainer>
             <OrderHistoryCard>
-            <p>Bullger Vila Madalena</p>
-            <p>23 outubro 219</p>
-            <h3>SUBTOTAL R$89,00</h3>
+            {listOfOrders}
             </OrderHistoryCard>
-          </AddressContainer>
+          </HistoryContainer>
         ) : (
           <HistoryOrderTitle>Você não realizou nenhum pedido</HistoryOrderTitle>
         )}
