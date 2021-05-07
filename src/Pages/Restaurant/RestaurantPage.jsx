@@ -14,7 +14,7 @@ export default function RestaurantPage() {
   const history = useHistory();
   const [restaurantDetails, setRestaurantDetails] = useState({});
   const [categories, setCategories] = useState([]);
-  const {cart, setCart} = useContext(GlobalStateContext)
+  const {cart, setCart, removeItemFromCart} = useContext(GlobalStateContext)
   const {selection, setSelection} = useContext(GlobalStateContext)
    
   useEffect(() => {
@@ -29,7 +29,6 @@ export default function RestaurantPage() {
       )
       .then((res) => {
         setRestaurantDetails(res.data.restaurant);
-        console.log(res.data.restaurant);
       })
       .catch((err) => {
         alert(err);
@@ -58,9 +57,10 @@ export default function RestaurantPage() {
     alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
     setSelection(1)
   };
-console.log(cart)
+  
   
   const renderCategories = categories.map((category) => {
+   
     return (
       <div>
         <h1>{category}</h1>
@@ -70,12 +70,15 @@ console.log(cart)
               return (
                 <CardProduct
                   key={item.id}
+                  id={item.id}
                   name={item.name}
                   description={item.description}
                   price={item.price}
-                  photo={item.photoUrl}
+                  photoUrl={item.photoUrl}
                   category={item.category}
+                  amount={cart.find((cartItem)=> cartItem.id === item.id)?.amount}
                   addItemToCart={() => addItemToCart(item)}
+                  removeItemFromCart={() => removeItemFromCart(item)}
                 />
               );
             }

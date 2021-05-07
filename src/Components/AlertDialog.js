@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -13,14 +13,16 @@ import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
 import styled from "styled-components";
 import GlobalStateContext from '../Global/GlobalStateContext'
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 export default function AlertDialog(props) {
+  const [findCart, setFindCart] = useState()
+  const { cart, setCart } = useContext(GlobalStateContext);
   const [open, setOpen] = React.useState(false);
   const {selection, setSelection} = useContext(GlobalStateContext)
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,12 +40,29 @@ export default function AlertDialog(props) {
     handleClose();
     props.addItemToCart();
   };
+  const handleRemove = () =>{
+    props.removeItemFromCart();
+  }
+  const changeButton = () =>{
+    const findArray = cart.find(card => card.id === props.id);
+    setFindCart(findArray);
+  }
+  useEffect(()=>{
+    changeButton()
+  },[cart])
+  
   return (
     <div>
       <ButtonContainer>
-        <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-          ADICIONAR
-        </Button>
+       { findCart ? (
+        <Button variant="outlined" color="secondary" onClick={handleRemove}>
+        REMOVER
+      </Button>
+       ): (
+       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+       ADICIONAR
+     </Button>)
+       } 
       </ButtonContainer>
 
       <Dialog

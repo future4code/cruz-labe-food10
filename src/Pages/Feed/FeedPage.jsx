@@ -7,6 +7,7 @@ import {All, Content, ContentRestaurant, Header, MyCircularProgress, Title} from
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import {StylesProvider} from '@material-ui/core/styles'
 import useAuthorization from "../../Hooks/useAuthetication";
+import Footer from '../../Components/Footer/Footer'
 
 export default function FeedPage() {
   useAuthorization()
@@ -52,6 +53,7 @@ export default function FeedPage() {
         </ContentRestaurant>
       )}
       <ActiveOrder />
+      <Footer/>
     </Content>
   </All>
 }
