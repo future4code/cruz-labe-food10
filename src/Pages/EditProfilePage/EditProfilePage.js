@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
+import useAuthentication from '../../Hooks/useAuthetication'
 import axios from "axios"
 import { BASE_URL } from "../../constants/url"
 import { Title, Body, TitleContainer, ArrowBack} from './styled'
 import { useForm } from "../../Hooks/useForm"
-// import { useAuthorization } from '../../Hooks/useAuthetication'
 import { useHistory } from "react-router-dom"
 import { goToProfilePage } from '../../Coordination/coordinator'
-import { TextField, Button, CircularProgress } from "@material-ui/core"
+import { TextField, Button } from "@material-ui/core"
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from '../../constants/themes'
 import back from '../../Assets/Img/back.svg'
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 })
 
 const EditProfilePage = () => {
-  // useAuthorization()
+  useAuthentication()
   const classes = useStyles()
   const history = useHistory()
   const [form, onChange, clear, setAll] = useForm({name: "", email: "", cpf: ""})

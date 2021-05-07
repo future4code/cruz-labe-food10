@@ -1,12 +1,5 @@
 import styled from 'styled-components'
 
-// export const RenderContainer = styled.div`
-//   box-sizing: border-box;
-//   padding: 0px;
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-// `;
 
 export const EditImg = styled.img`
     padding: 2vw;
@@ -33,8 +26,6 @@ export const Title = styled.p`
 export const ProfileContainer = styled.div`
   text-align: left;
   margin: 0 4vw;
-  /* padding-bottom: 4vw; */
-  /* border-bottom: 1px solid lightgray; */
 `
 
 export const AddressContainer = styled.div`
@@ -61,8 +52,10 @@ export const FooterContainer = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 15vw;
   color: white;
   text-align: center;
+  background-color: white;
   border-top: 1px solid #b8b8b8;
 `
 
@@ -77,6 +70,7 @@ export const FooterImgContainer = styled.div`
     flex-direction: row;
     justify-content: space-around;
     padding: 0 2vw;
+    background-color: white;
 `
 
 export const FooterImg = styled.img`
@@ -86,11 +80,18 @@ export const FooterImg = styled.img`
 export const OrderHistoryCard = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px solid #b8b8b8;
+    border: 1px solid #ffffff;
     border-radius: 4px;
 `
 
 export const OrderHistoryContainer = styled.div`
     margin: 4vw 0 2vw 0;
     background-color: white;
+`
+
+export const HistoryContainer = styled.div`
+  text-align: left;
+  padding: 2vw 8vw;
+  padding-bottom: 1vw;
+  background-color: white;
 `

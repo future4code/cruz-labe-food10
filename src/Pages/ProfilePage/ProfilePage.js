@@ -11,12 +11,13 @@ import { Title, OrderTitle, AddressContainer,
   AddressTitle, TitleContainer, ProfileContainer, 
   FooterContainer, HistoryOrderTitle, 
   FooterImgContainer, FooterImg, OrderHistoryCard,
-  OrderHistoryContainer } from './styled'
+  OrderHistoryContainer, HistoryContainer } from './styled'
 import { EditImg } from './styled'
+import OrderHistoryCards from '../../Components/OrderHistoryCards/OrderHistoryCards'
 import { useHistory } from "react-router-dom"
 import {
   goToEditProfilePage,
-  goToEditAddressPage,
+  goToAddressPage,
   goToFeedPage,
   goToCart,
   goToProfilePage
@@ -26,7 +27,7 @@ const ProfilePage = () => {
   useAuthentication()
   const history = useHistory()
   const [profile, setProfile] = useState({})
-  const [order, setOrder] = useState({})
+  const [orders, setOrders] = useState({})
 
   useEffect(() => {
     const getProfile = () => {
@@ -50,18 +51,30 @@ const ProfilePage = () => {
       axios
         .get(`${BASE_URL}/orders/history`, {
           headers: {
-            // auth: localStorage.getItem("token")
-            auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFUMEVHclRKWmJST3FNeHdUc0hjIiwibmFtZSI6IkFzdHJvZGV2IiwiZW1haWwiOiJhc3Ryb2RldkBmdXR1cmU0LmNvbSIsImNwZiI6IjExMS4xMTEuMTExLTEzIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEFmb25zbyBCcmF6LCAxNzcsIDcxIC0gVmlsYSBOLiBDb25jZWnDp8OjbyIsImlhdCI6MTYyMDE2MDkzNn0.-ubAiJ4H374qzPYCCZAFpePv9-NyBJiC4dYPKiDZlLc"
+            auth: localStorage.getItem("token")
           }
         })
         .then((res) => {
-          console.log(res.data);
-          setOrder(res.data.user);
+          console.log(res.data.orders);
+          setOrders(res.data);
         })
         .catch((err) => console.log(err));
     };
-    ordersHistory();
+    ordersHistory()
   }, []);
+
+  const listOfOrders = orders && orders.orders && orders.orders.map((order) => {
+    console.log(order.restaurantName)
+    return (
+      <OrderHistoryCards
+      key={order.id}
+      restaurant={order.restaurantName}
+      created={order.createdAt}
+      expires={order.expiresAt}
+      total={order.totalPrice}
+      />
+    )
+  })
 
   return (
     <div>
@@ -88,7 +101,7 @@ const ProfilePage = () => {
       <EditImg
             src={edit}
             alt={"editar"}
-            onClick={() => goToEditAddressPage(history)}
+            onClick={() => goToAddressPage(history)}
           />
         <AddressTitle>Endereço cadastrado</AddressTitle>
         <p>
@@ -101,14 +114,12 @@ const ProfilePage = () => {
       </TitleContainer>
       {/* ProfileOrderCards - component*/}
       <OrderHistoryContainer>
-        {order ? (
-          <AddressContainer>
+        {listOfOrders ? (
+          <HistoryContainer>
             <OrderHistoryCard>
-            <p>Bullger Vila Madalena</p>
-            <p>23 outubro 219</p>
-            <h3>SUBTOTAL R$89,00</h3>
+            {listOfOrders}
             </OrderHistoryCard>
-          </AddressContainer>
+          </HistoryContainer>
         ) : (
           <HistoryOrderTitle>Você não realizou nenhum pedido</HistoryOrderTitle>
         )}
@@ -117,15 +128,15 @@ const ProfilePage = () => {
         {profile ? (
           <FooterImgContainer>
             <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
-            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart()} />
-            <FooterImg src={avatar_on} alt={"perfil"} onCLick={() => goToProfilePage()}/>
+            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
+            <FooterImg src={avatar_on} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
           </FooterImgContainer>
         ) : 
         (
           <FooterImgContainer>
             <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
-            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart()} />
-            <FooterImg src={avatar} alt={"perfil"} onCLick={() => goToProfilePage()}/>
+            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
+            <FooterImg src={avatar} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
           </FooterImgContainer>
         )}
         Footer
