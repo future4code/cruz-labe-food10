@@ -7,9 +7,9 @@ import {
   goToFeedPage,
   goToProfilePage,
 } from "../../Coordination/coordinator";
-import Avatar from '../../Assets/Img/avatar.svg'
-import Shopping_cart from '../../Assets/Img/shopping-cart.svg'
-import Homepage from '../../Assets/Img/homepage.svg'
+import Avatar from "../../Assets/Img/avatar.svg";
+import Shopping_cart from "../../Assets/Img/shopping-cart.svg";
+import Homepage from "../../Assets/Img/homepage.svg";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -17,9 +17,10 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 const useStyles = makeStyles({
   root: {
-    width: 350,
-    position:'fixed',
-    bottom:0,
+    width: "100vw",
+    position: "fixed",
+    bottom: 0,
+    borderTop: "1px solid #b8b8b8",
   },
 });
 
@@ -38,15 +39,13 @@ function Footer() {
       className={classes.root}
     >
       <BottomNavigationAction
-       icon={<img  src={Homepage} onClick={() => goToFeedPage(history)} />}
+        icon={<img src={Homepage} onClick={() => goToFeedPage(history)} />}
       />
       <BottomNavigationAction
-        icon={<img  src={Shopping_cart} onClick={() => goToCart(history)} />}
+        icon={<img src={Shopping_cart} onClick={() => goToCart(history)} />}
       />
       <BottomNavigationAction
-        icon={
-          <img  src={Avatar} onClick={() => goToProfilePage(history)} />
-        }
+        icon={<img src={Avatar} onClick={() => goToProfilePage(history)} />}
       />
     </BottomNavigation>
   );

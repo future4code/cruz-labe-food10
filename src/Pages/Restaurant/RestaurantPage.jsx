@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
-import { DivBack, ImgBack, P } from "./styles";
+import { DivBack, ImgBack, P, CategoryContent, CategoryTitle } from "./styles";
 import iconBack from "../../Assets/Img/back.svg";
-import Loading from '../../Components/Loading/Loading'
+import Loading from "../../Components/Loading/Loading";
 import axios from "axios";
 import GlobalStateContext from "../../Global/GlobalStateContext";
-import Footer from '../../Components/Footer/Footer'
+import Footer from "../../Components/Footer/Footer";
 import CardProduct from "../../Components/CardProduct/CardProduto";
 
 export default function RestaurantPage() {
@@ -14,9 +14,15 @@ export default function RestaurantPage() {
   const history = useHistory();
   const [restaurantDetails, setRestaurantDetails] = useState({});
   const [categories, setCategories] = useState([]);
-  const {cart, setCart, removeItemFromCart} = useContext(GlobalStateContext)
-  const {selection, setSelection} = useContext(GlobalStateContext)
-   
+  const {
+    cart,
+    setCart,
+    removeItemFromCart,
+    setSelection,
+    selection,
+    setRestaurantOrder,
+  } = useContext(GlobalStateContext);
+
   useEffect(() => {
     getRestaurantDetails(params.id);
   }, [params.id]);
@@ -34,7 +40,6 @@ export default function RestaurantPage() {
         alert(err);
       });
   };
-  
 
   useEffect(() => {
     if (restaurantDetails && restaurantDetails.products) {
@@ -48,25 +53,25 @@ export default function RestaurantPage() {
     }
   }, [restaurantDetails]);
 
-
   const addItemToCart = (newItem) => {
+    setRestaurantOrder(restaurantDetails);
     let newCart = [...cart];
-
     newCart.push({ ...newItem, amount: selection });
     setCart(newCart);
-    alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
-    setSelection(1)
+    alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`);
+    setSelection(1);
   };
-  
-  
+
   const renderCategories = categories.map((category) => {
-   
     return (
       <div>
-        <h1>{category}</h1>
+        <CategoryContent>
+          <CategoryTitle>{category}</CategoryTitle>
+          <hr />
+        </CategoryContent>
         {restaurantDetails.products &&
           restaurantDetails.products.map((item) => {
-            if(item.category === category){
+            if (item.category === category) {
               return (
                 <CardProduct
                   key={item.id}
@@ -76,13 +81,14 @@ export default function RestaurantPage() {
                   price={item.price}
                   photoUrl={item.photoUrl}
                   category={item.category}
-                  amount={cart.find((cartItem)=> cartItem.id === item.id)?.amount}
+                  amount={
+                    cart.find((cartItem) => cartItem.id === item.id)?.amount
+                  }
                   addItemToCart={() => addItemToCart(item)}
                   removeItemFromCart={() => removeItemFromCart(item)}
                 />
               );
             }
-            
           })}
       </div>
     );
@@ -95,9 +101,10 @@ export default function RestaurantPage() {
         <P>Restaurante</P>
         <div></div>
       </DivBack>
+
       <CardRestaurant id={params.id} page={"Restaurant"} />
-      {restaurantDetails ? renderCategories : <Loading/>}
-      <Footer/>
+      {restaurantDetails ? renderCategories : <Loading />}
+      <Footer />
     </>
   );
 }

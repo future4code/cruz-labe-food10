@@ -31,15 +31,14 @@ export const ProductTitle = styled.span`
   font-size: 16px;
 `;
 export const ProductText = styled.span`
-  color: #e5e5ea;
+  color: #8e8e93;
   font-size: 14px;
 `;
-
 
 export const Img = styled.div`
   width: 100px;
   background: ${(props) => `url(${props.background}) no-repeat center center`};
-  background-size:cover;
+  background-size: cover;
 `;
 
 export const AmountBox = styled.div`

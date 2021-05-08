@@ -1,29 +1,32 @@
 import GlobalStateContext from "./GlobalStateContext";
 import React, { useState, useEffect } from "react";
-import axios from 'axios'
-import { BASE_URL } from "../constants/url"
+import axios from "axios";
+import { BASE_URL } from "../constants/url";
+import useRequestData from "../Hooks/useRequestData";
 
 export const GlobalState = (props) => {
   const [cart, setCart] = useState([]);
   const [selection, setSelection] = useState(1);
   const [profile, setProfile] = useState({});
+  const [restaurantOrder, setRestaurantOrder] = useState(null);
+  const [activeOrder] = useRequestData("/active-order", {}, "order");
 
   useEffect(() => {
     const getProfile = () => {
       axios
         .get(`${BASE_URL}/profile`, {
           headers: {
-            auth: localStorage.getItem('token')
-          }
+            auth: localStorage.getItem("token"),
+          },
         })
         .then((res) => {
-          console.log(res.data)
-          setProfile(res.data.user)
+          console.log(res.data);
+          setProfile(res.data.user);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
     };
-    getProfile()
-  }, [])
+    getProfile();
+  }, []);
 
   const removeItemFromCart = (itemToRemove) => {
     const index = cart.findIndex((item) => item.id === itemToRemove.id);
@@ -36,7 +39,6 @@ export const GlobalState = (props) => {
     setCart(newCart);
   };
 
-  
   const providerValue = {
     cart,
     setCart,
@@ -44,7 +46,10 @@ export const GlobalState = (props) => {
     setSelection,
     profile,
     setProfile,
-    removeItemFromCart
+    removeItemFromCart,
+    restaurantOrder,
+    setRestaurantOrder,
+    activeOrder,
   };
 
   return (

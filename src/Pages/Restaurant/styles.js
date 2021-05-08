@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const DivBack = styled.div`
   width: 100%;
@@ -11,20 +11,21 @@ export const DivBack = styled.div`
   top: 0px;
   display: flex;
   justify-content: space-between;
+  background-color: white;
   align-items: center;
-  >div{
+  > div {
     width: 23px;
     height: 24px;
     margin-top: 30px;
     margin-bottom: 10px;
   }
-`
+`;
 
 export const ImgBack = styled.img`
   width: 23px;
   height: 24px;
   cursor: pointer;
-`
+`;
 
 export const P = styled.p`
   width: 175px;
@@ -33,5 +34,11 @@ export const P = styled.p`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-`
+`;
 
+export const CategoryTitle = styled.p`
+  font-size: 16px;
+`;
+export const CategoryContent = styled.div`
+  margin: 0 20px;
+`;
