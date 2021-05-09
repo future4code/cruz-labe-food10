@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import CardProduct from "../../Components/CardProduct/CardProduto";
-import { Card, Img, AddressTitle, AddressContainer } from "./styles";
+import {Card, Img, AddressTitle, AddressContainer, Header} from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CartPage() {
   const { cart, removeItemFromCart } = useContext(GlobalStateContext);
   const [price, setPrice] = useState([]);
-  const { profile} = useContext(GlobalStateContext);
   const [address, setAddress] = useState();
 
   useEffect(() => {
@@ -61,11 +60,13 @@ export default function CartPage() {
 
   return (
     <div>
-      <h1> Carrinho</h1>
+      <Header> Meu carrinho</Header>
       <div>
         <AddressContainer>
           <AddressTitle>Endereço Entrega</AddressTitle>
-          <p>{profile.address}</p>
+          {address &&
+            <p>{address.street}, {address.number} - {address.neighbourhood}</p>
+          }
         </AddressContainer>
       </div>
       {cart.map((item) => {

@@ -33,3 +33,12 @@ export const AddressTitle = styled.p`
   margin: 0;
   color: #b8b8b8;
   `
+
+export const Header = styled.header`
+  width: min(415px, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  font-size: 16px;
+`
