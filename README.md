@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Rappi4 
 
-In the project directory, you can run:
+![rappi44](https://user-images.githubusercontent.com/2348971/117586275-97799f00-b0ed-11eb-9bef-606ff5cc2537.png)
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br/>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+![javascript-bagde](https://img.shields.io/github/languages/top/future4code/cruz-pokedex17)
+![PR-closed](https://img.shields.io/github/issues-pr-closed/future4code/cruz-pokedex17)
+![Json](https://img.shields.io/github/package-json/v/future4code/cruz-pokedex17)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Bem vindos!
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Projeto Rappi4, inspirado no App de smartphones [Rappi](http://www.rappi.com.br), obedecendo especificações de design previamente estabelecidas.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Sumário
 
-### `npm run eject`
+  - [Tecnologias](#tecnologias)
+  - [Em funcionamento](#em-funcionamento)
+  - [Publicação](#publicação)
+  - [Integrantes do grupo](#integrantes-do-grupo)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Tecnologias
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+[React JS](https://pt-br.reactjs.org/) - biblioteca JavaScript para criar interfaces de usuário.<br/>
+[ReactRouter](https://reactrouter.com/) - coleção de componentes de navegação para React.</br>
+[Styled-components](https://styled-components.com/) -  permite CSS escrito diretamente no código para estilização de componentes do React JS.<br/>
+[Axios](https://axios-http.com/) - um cliente HTTP baseado em Promises para fazer requisições.</br>
+[Material UI](https://material-ui.com/) - biblioteca UI para React designada a criar User Interfaces.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Em funcionamento
 
-## Learn More
+- Splash Screen com o logo.
+- Tela de login com autenticação na API privada, com possibilidade de cadastro de usuário caso não tenha login.
+- Tela com feed de restaurantes e search dos restaurantes.
+- Tela com os detalhes do restaurante escolhido e botões para adicionar os pedidos.
+- Carrinho de compras e tela com os pedidos em andamento, obedecendo o tempo estabelecido de espera da entrega dos produtos.
+- Tela de perfil de usuário, com possibilidade de edição das informações cadastradas, pessoais e endereço.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Publicação
 
-### Code Splitting
+Projeto publicado no Surge:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+~~------------~~
 
-### Analyzing the Bundle Size
+## Integrantes do grupo
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Fabiana Genila Ramos Pereira
+- Giselle Nepomuceno Rosa
+- Samuel Pires Mateus
+- Sérgio Henrique Nery Figorelle de Carvalho Milagres
