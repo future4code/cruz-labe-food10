@@ -15,8 +15,6 @@ export const Content = styled.div`
   align-items: center;
   width: min(415px, 100%);
   height: min(800px, 100%);
-  border-left: 1px solid black;
-  border-right: 1px solid black;
 `
 
 export const Header = styled.header`
