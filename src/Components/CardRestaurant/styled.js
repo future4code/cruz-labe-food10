@@ -21,6 +21,7 @@ export const Img = styled.img`
   height: 120px;
   margin: 0;
   margin-bottom: 12px;
+  object-fit: scale-down;
 `
 
 export const Name = styled.p`
