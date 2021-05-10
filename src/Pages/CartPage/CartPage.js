@@ -7,6 +7,8 @@ import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import {BASE_URL} from "../../constants/url";
+import {api} from "../../Services/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,12 +53,39 @@ export default function CartPage() {
     }
   };
   
+  const placeOrder = async()=>{
+    const products = cart[0].products.map(item=>{
+      return {
+        id: item.item.id,
+        quantity: item.quantity
+      }
+    })
+    const body = {
+      products: products,
+      paymentMethod: 'creditcard'
+    }
+    console.log('body', body)
+    try{
+      const res = await api.post(`/restaurants/${cart[0].id}/order`, body)
+    }
+    catch (err){
+      console.log('erro', err)
+    }
+  }
+
+  const onClickConfirme = ()=>{
+    if(cart.length===0){
+      window.alert('Carrinho vazio')
+      return
+    }
+    if(window.confirm('Confirmar pedido?')){
+      placeOrder()
+    }
+  }
 
   useEffect(() => {
     getPrice();
   }, [cart]);
-
-  console.log('cart',cart)
 
   return (
     <Container>
@@ -88,7 +117,7 @@ export default function CartPage() {
         {cart.length > 0 ? <></> : <CartEmpty> Carrinho Vazio</CartEmpty>}
         <h2>TOTAL</h2>
       </div>
-      <Button variant="contained" color="secondary">
+      <Button variant="contained" color="secondary" onClick={onClickConfirme}>
         CONFIRMAR
       </Button>
       <div>
