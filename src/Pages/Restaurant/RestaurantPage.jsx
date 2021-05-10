@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
-import { DivBack, ImgBack, P } from "./styles";
+import {All, AllContent, Category, Content, DivBack, ImgBack, P} from "./styles";
 import iconBack from "../../Assets/Img/back.svg";
 import Loading from '../../Components/Loading/Loading'
 import axios from "axios";
@@ -63,7 +63,7 @@ export default function RestaurantPage() {
    
     return (
       <div>
-        <h1>{category}</h1>
+        <Category>{category}</Category>
         {restaurantDetails.products &&
           restaurantDetails.products.map((item) => {
             if(item.category === category){
@@ -89,15 +89,20 @@ export default function RestaurantPage() {
   });
 
   return (
-    <>
-      <DivBack>
-        <ImgBack src={iconBack} onClick={() => history.goBack()} />
-        <P>Restaurante</P>
-        <div></div>
-      </DivBack>
-      <CardRestaurant id={params.id} page={"Restaurant"} />
-      {restaurantDetails ? renderCategories : <Loading/>}
-      <Footer/>
-    </>
+    <All>
+      <AllContent>
+        <DivBack>
+          <ImgBack src={iconBack} onClick={() => history.goBack()} />
+          <P>Restaurante</P>
+          <div></div>
+        </DivBack>
+
+        <Content>
+          <CardRestaurant id={params.id} page={"Restaurant"} />
+          {restaurantDetails ? renderCategories : <Loading/>}
+        </Content>
+        <Footer/>
+      </AllContent>
+    </All>
   );
 }

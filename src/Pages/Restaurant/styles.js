@@ -36,3 +36,31 @@ export const P = styled.p`
   font-size: 16px;
 `
 
+export const Category = styled.div`
+  width: 100%;
+  height: 26px;
+  border-bottom: 1px solid black;
+  margin-bottom: 7px;
+`
+
+export const All = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const AllContent = styled.div`
+  width: min(415px, 100%);
+  height: min(800px, 100%);
+  overflow: hidden;
+`
+
+export const Content = styled.main`
+  width: 100%;
+  height: calc(100% - 130px);
+  padding: 0 16px;
+  box-sizing: border-box;
+  overflow-y: auto;
+`
