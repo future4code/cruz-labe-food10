@@ -8,33 +8,20 @@ import axios from "axios";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import Footer from '../../Components/Footer/Footer'
 import CardProduct from "../../Components/CardProduct/CardProduto";
+import useRequestData from "../../Hooks/useRequestData";
 
 export default function RestaurantPage() {
   const params = useParams();
   const history = useHistory();
-  const [restaurantDetails, setRestaurantDetails] = useState({});
+  if(!params.id)history.goBack()
+  const [restaurantDetails, setRestaurantDetails] = useRequestData(
+    `/restaurants/${params.id}`,
+    {},
+    'restaurant'
+  )
   const [categories, setCategories] = useState([]);
   const {cart, setCart, removeItemFromCart} = useContext(GlobalStateContext)
   const {selection, setSelection} = useContext(GlobalStateContext)
-   
-  useEffect(() => {
-    getRestaurantDetails(params.id);
-  }, [params.id]);
-
-  const getRestaurantDetails = () => {
-    axios
-      .get(
-        `https://us-central1-missao-newton.cloudfunctions.net/rappi4D/restaurants/${params.id}`,
-        { headers: { auth: localStorage.getItem("token") } }
-      )
-      .then((res) => {
-        setRestaurantDetails(res.data.restaurant);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
-  
 
   useEffect(() => {
     if (restaurantDetails && restaurantDetails.products) {
@@ -48,11 +35,27 @@ export default function RestaurantPage() {
     }
   }, [restaurantDetails]);
 
-
   const addItemToCart = (newItem) => {
     let newCart = [...cart];
-
-    newCart.push({ ...newItem, amount: selection });
+    const index = newCart.findIndex((restaurant)=>{
+      return restaurant.id === params.id
+    })
+    if(index>=0){
+      newCart[index].products.push({
+        quantity: selection,
+        id: newItem.id
+      })
+    }
+    else{
+      const obj = {
+        id: params.id,
+        products:[{
+          quantity: selection,
+          id: newItem.id
+        }]
+      }
+      newCart.push(obj)
+    }
     setCart(newCart);
     alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
     setSelection(1)
