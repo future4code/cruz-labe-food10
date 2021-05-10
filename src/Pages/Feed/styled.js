@@ -15,6 +15,9 @@ export const Content = styled.div`
   align-items: center;
   width: min(415px, 100%);
   height: min(800px, 100%);
+  @media (min-width: 416px){
+    border: 1px solid #b8b8b8;
+  }
 `
 
 export const Header = styled.header`
