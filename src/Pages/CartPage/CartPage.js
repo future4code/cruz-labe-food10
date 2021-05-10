@@ -10,7 +10,7 @@ import {
   CartEmpty,
   Container,
   ContentRestaurant,
-  DivPrice
+  DivPrice, DivPagamento, DivRadio
 } from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
@@ -29,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CartPage() {
-  const { cart, removeItemFromCart } = useContext(GlobalStateContext);
-  const [price, setPrice] = useState([]);
+  const { cart, removeItemFromCart, setCart } = useContext(GlobalStateContext);
+  const [price, setPrice] = useState(0);
   const [address, setAddress] = useState();
   const [shipping, setShipping] = useState(0);
+  const [payment, setPayment] = useState('creditcard');
 
   useEffect(() => {
     getAddress();
@@ -87,14 +88,18 @@ export default function CartPage() {
     })
     const body = {
       products: products,
-      paymentMethod: 'creditcard'
+      paymentMethod: payment
     }
     console.log('body', body)
     try{
       const res = await api.post(`/restaurants/${cart[0].id}/order`, body)
+      window.alert('Pedido realizado')
+      const newCart = [...cart]
+      newCart.splice(0,1)
+      setCart(newCart)
     }
     catch (err){
-      console.log('erro', err)
+      window.alert(err.response.data.message)
     }
   }
 
@@ -106,6 +111,10 @@ export default function CartPage() {
     if(window.confirm('Confirmar pedido?')){
       placeOrder()
     }
+  }
+
+  const onChangeRadio = (e)=>{
+    setPayment(e.target.value)
   }
 
   useEffect(() => {
@@ -155,12 +164,32 @@ export default function CartPage() {
         </div>
       </DivPrice>
 
+      <DivPagamento>
+        <div>Forma de pagamento</div>
+        <DivRadio>
+          <input
+            type={'radio'}
+            value={'money'}
+            name={'money'}
+            onClick={onChangeRadio}
+          />
+          <label htmlFor={'money'}>Dinheiro</label>
+        </DivRadio>
+        <DivRadio>
+          <input
+            type={'radio'}
+            value={'creditcard'}
+            name={'money'}
+            onClick={onChangeRadio}
+            defaultChecked={true}
+          />
+          <label htmlFor={'money'}>Cartão de crédito</label>
+        </DivRadio>
+      </DivPagamento>
+
       <Button variant="contained" color="secondary" onClick={onClickConfirme}>
         CONFIRMAR
       </Button>
-      <div>
-        <h1>Colocar espaço aqui</h1>
-      </div>
       <Footer />
     </Container>
   );

@@ -92,3 +92,21 @@ export const DivPrice = styled.div`
     }
   }
 `
+
+export const DivPagamento = styled.div`
+  width: 100%;
+  margin: 12px 0 9px 0;
+  display: flex;
+  flex-direction: column;
+  >div{
+    :nth-child(1){
+    box-sizing: border-box;
+    width: 100%;
+    height: 26px;
+    border-bottom: 1px solid black;
+  }
+`
+
+export const DivRadio = styled.div`
+  margin-top: 11px;
+`
