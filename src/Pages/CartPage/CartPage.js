@@ -2,15 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import CardProduct from "../../Components/CardProduct/CardProduto";
 import {
-  Card,
-  Img,
-  AddressTitle,
   AddressContainer,
   Header,
   CartEmpty,
   Container,
   ContentRestaurant,
-  DivPrice, DivPagamento, DivRadio
+  DivPrice, DivPagamento, DivRadio, Content, All
 } from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
@@ -122,75 +119,79 @@ export default function CartPage() {
   }, [cart]);
 
   return (
-    <Container>
-      <Header> Meu carrinho</Header>
-      <AddressContainer>
-        <p>Endereço de entrega</p>
-        {address &&
-          <p>{address.street}, {address.number} - {address.neighbourhood}</p>
+    <All>
+      <Container>
+        <Header> Meu carrinho</Header>
+        <AddressContainer>
+          <p>Endereço de entrega</p>
+          {address &&
+            <p>{address.street}, {address.number} - {address.neighbourhood}</p>
+          }
+        </AddressContainer>
+
+        {cart.length > 0 &&
+          <ContentRestaurant>
+            <CardRestaurant id={cart[0].id} page={'Cart'}/>
+          </ContentRestaurant>
         }
-      </AddressContainer>
 
-      {cart.length > 0 &&
-        <ContentRestaurant>
-          <CardRestaurant id={cart[0].id} page={'Cart'}/>
-        </ContentRestaurant>
-      }
+        <Content>
+          {cart.length>0 && cart[0].products.map((item) => {
+            return (
+              <CardProduct
+                key={item.item.id}
+                id={item.item.id}
+                idRestaurant={cart[0].id}
+                name={item.item.name}
+                description={item.item.description}
+                price={item.item.price}
+                amount={item.quantity}
+                photoUrl={item.item.photoUrl}
+                category={item.item.category}
+                removeItemFromCart={() => removeItemFromCart(item.item, cart[0].id)}
+              />
+            );
+          })}
 
-      {cart.length>0 && cart[0].products.map((item) => {
-        return (
-          <CardProduct
-            key={item.item.id}
-            id={item.item.id}
-            idRestaurant={cart[0].id}
-            name={item.item.name}
-            description={item.item.description}
-            price={item.item.price}
-            amount={item.quantity}
-            photoUrl={item.item.photoUrl}
-            category={item.item.category}
-            removeItemFromCart={() => removeItemFromCart(item.item, cart[0].id)}
-          />
-        );
-      })}
+          {cart.length > 0 ? <></> : <CartEmpty> Carrinho Vazio</CartEmpty>}
 
-      {cart.length > 0 ? <></> : <CartEmpty> Carrinho Vazio</CartEmpty>}
+          <DivPrice>
+            <p>Frete R${shipping.toFixed(2)}</p>
+            <div>
+              <p>SUBTOTAL</p>
+              <p>R${price.toFixed(2)}</p>
+            </div>
+          </DivPrice>
 
-      <DivPrice>
-        <p>Frete R${shipping.toFixed(2)}</p>
-        <div>
-          <p>SUBTOTAL</p>
-          <p>R${price.toFixed(2)}</p>
-        </div>
-      </DivPrice>
+          <DivPagamento>
+            <div>Forma de pagamento</div>
+            <DivRadio>
+              <input
+                type={'radio'}
+                value={'money'}
+                name={'money'}
+                onClick={onChangeRadio}
+              />
+              <label htmlFor={'money'}>Dinheiro</label>
+            </DivRadio>
+            <DivRadio>
+              <input
+                type={'radio'}
+                value={'creditcard'}
+                name={'money'}
+                onClick={onChangeRadio}
+                defaultChecked={true}
+              />
+              <label htmlFor={'money'}>Cartão de crédito</label>
+            </DivRadio>
+          </DivPagamento>
 
-      <DivPagamento>
-        <div>Forma de pagamento</div>
-        <DivRadio>
-          <input
-            type={'radio'}
-            value={'money'}
-            name={'money'}
-            onClick={onChangeRadio}
-          />
-          <label htmlFor={'money'}>Dinheiro</label>
-        </DivRadio>
-        <DivRadio>
-          <input
-            type={'radio'}
-            value={'creditcard'}
-            name={'money'}
-            onClick={onChangeRadio}
-            defaultChecked={true}
-          />
-          <label htmlFor={'money'}>Cartão de crédito</label>
-        </DivRadio>
-      </DivPagamento>
-
-      <Button variant="contained" color="secondary" onClick={onClickConfirme}>
-        CONFIRMAR
-      </Button>
-      <Footer />
-    </Container>
+          <Button variant="contained" color="secondary" onClick={onClickConfirme}>
+            CONFIRMAR
+          </Button>
+        </Content>
+        <Footer />
+      </Container>
+    </All>
   );
 }

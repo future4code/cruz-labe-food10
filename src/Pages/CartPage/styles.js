@@ -1,20 +1,17 @@
 import styled from 'styled-components'
 
+export const All = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+`
 
 export const Container = styled.div`
   width: min(415px, 100%);
   height: min(800px, 100%);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 `;
-export const Card = styled.div`
-width:80%;
-display:flex;
-margin:10px;
-border:1px solid #E5E5EA;
-border-radius:5px;
-`;
-
 
 export const Img = styled.img`
 width:100px;
@@ -27,19 +24,16 @@ export const AddressContainer = styled.div`
   background-color: #eeeeee;
   height: 76px;
   display: flex;
-  flex-wrap: wrap;
-  position: relative;
+  flex-direction: column;
+  justify-content: center;
   >p{
+    margin: 0;
+    padding: 0;
     :nth-child(1){
       color: #b8b8b8;
-      height: 10px;
-      width: 100%;
+      margin-bottom: 8px;
     }
-    :nth-child(2){
-      width: 100%;
-      position: absolute;
-      bottom:0;
-    }
+   
   }
 `
 
@@ -109,4 +103,13 @@ export const DivPagamento = styled.div`
 
 export const DivRadio = styled.div`
   margin-top: 11px;
+`
+
+export const Content = styled.div`
+  width: 100%;
+  height: calc(100% - 300px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 16px;
+  box-sizing: border-box;
 `
