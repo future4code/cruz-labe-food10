@@ -52,7 +52,7 @@ export const MyCircularProgress = styled(CircularProgress)`
 
 export const ContentRestaurant = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 230px);
   overflow-y: auto;
   overflow-x: hidden;
 `
