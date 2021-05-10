@@ -12,7 +12,7 @@ export const Content = styled.div`
   margin: 0;
   border-radius: 8px;
   border: ${props=>props.page==='Feed'? '1px solid #b8b8b8' : '0'};
-  overflow: hidden;
+  overflow-y: auto;
   margin-bottom: 8px;
 `
 
