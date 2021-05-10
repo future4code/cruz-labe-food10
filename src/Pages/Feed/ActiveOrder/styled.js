@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 
 export const All = styled.aside`
   width: 100%;
@@ -9,6 +10,7 @@ export const All = styled.aside`
   justify-content: center;
   position: fixed;
   bottom: 56px;
+  cursor: pointer;
 `
 
 export const Img = styled.img`
@@ -25,4 +27,17 @@ export const DivText = styled.div`
       color:  white;
     }
   }
+`
+
+export const AllOpen = styled.div`
+  position: fixed;
+  bottom: 56px;
+  right: 0px;
+`
+
+export const MyMenuOpen = styled(MenuOpenIcon)`
+  width: 30px;
+  color: #e86e5a;
+  transform: scale(1.5);
+  cursor: pointer;
 `
