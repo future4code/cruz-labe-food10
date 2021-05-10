@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import {Card, Img, Container} from "./styles"
+import {Card, Img, DivImg, BlurImg, Description, DivAlert} from "./styles"
 import AlertDialog from "../AlertDialog"
 
 
@@ -16,22 +16,22 @@ function CardProduct(props) {
   
   
     
-
+  console.log('props', props)
   return (
-      <div>
          <Card>
-              <div>
+              <DivImg>
                 <Img src={props.photoUrl} />
-              </div>
-              <div>
-              {props.amount}
-                <div>{props.name}</div>
-                <div>{props.description}</div>
-                <div>{props.price.toFixed(2)}</div>
-                <AlertDialog handleClose={handleClose} addItemToCart={props.addItemToCart}  id={props.id} removeItemFromCart={props.removeItemFromCart} open={open} />
-              </div>
-            </Card>
-      </div>
+              </DivImg>
+              <Description>
+                {props.amount}
+                <p>{props.name}</p>
+                <p>{props.description}</p>
+                <p>R${props.price.toFixed(2)}</p>
+              </Description>
+           <DivAlert>
+             <AlertDialog handleClose={handleClose} addItemToCart={props.addItemToCart}  id={props.id} removeItemFromCart={props.removeItemFromCart} open={open} />
+           </DivAlert>
+         </Card>
   );
 }
 

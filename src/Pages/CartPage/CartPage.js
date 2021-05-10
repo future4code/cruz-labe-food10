@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import CardProduct from "../../Components/CardProduct/CardProduto";
-import {Card, Img, AddressTitle, AddressContainer, Header} from "./styles";
+import {Card, Img, AddressTitle, AddressContainer, Header, CartEmpty, Container} from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
@@ -59,16 +59,15 @@ export default function CartPage() {
   }, [cart]);
 
   return (
-    <div>
+    <Container>
       <Header> Meu carrinho</Header>
-      <div>
-        <AddressContainer>
-          <AddressTitle>Endereço Entrega</AddressTitle>
-          {address &&
-            <p>{address.street}, {address.number} - {address.neighbourhood}</p>
-          }
-        </AddressContainer>
-      </div>
+      <AddressContainer>
+        <p>Endereço de entrega</p>
+        {address &&
+          <p>{address.street}, {address.number} - {address.neighbourhood}</p>
+        }
+      </AddressContainer>
+
       {cart.map((item) => {
         return (
           <CardProduct
@@ -85,8 +84,8 @@ export default function CartPage() {
         );
       })}
       <div>
+        {cart.length > 0 ? <></> : <CartEmpty> Carrinho Vazio</CartEmpty>}
         <h2>TOTAL</h2>
-        {cart.length > 0 ? price : <div> Carrinho Vazio</div>}
       </div>
       <Button variant="contained" color="secondary">
         CONFIRMAR
@@ -95,6 +94,6 @@ export default function CartPage() {
         <h1>Colocar espaço aqui</h1>
       </div>
       <Footer />
-    </div>
+    </Container>
   );
 }
