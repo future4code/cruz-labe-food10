@@ -46,7 +46,7 @@ Projeto Rappi4, inspirado no App de smartphones [Rappi](http://www.rappi.com.br)
 ## Publicação
 
 Projeto publicado no Surge:
-![Clique aqui](http://rappi-4d.surge.sh/feed)
+[Clique aqui](http://rappi-4d.surge.sh/feed)
 
 ## Integrantes do grupo
 
