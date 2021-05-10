@@ -41,10 +41,8 @@ export default function CartPage() {
 
   const getPrice = () => {
     if (cart.length > 0) {
-      let cartPrice =
-        cart &&
-        cart.map((item) => {
-          return item.price * item.amount;
+      let cartPrice = cart.map((item) => {
+          return item.item.price * item.quantity;
         });
       const total = cartPrice.reduce(
         (total, currentElement) => total + currentElement

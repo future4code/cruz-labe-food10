@@ -16,7 +16,6 @@ function CardProduct(props) {
   
   
     
-  console.log('props', props)
   return (
          <Card>
               <DivImg>

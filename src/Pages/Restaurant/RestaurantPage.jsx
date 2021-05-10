@@ -42,20 +42,21 @@ export default function RestaurantPage() {
     })
     if(index>=0){
       newCart[index].products.push({
+        item: newItem,
         quantity: selection,
-        id: newItem.id
       })
     }
     else{
       const obj = {
         id: params.id,
         products:[{
+          item: newItem,
           quantity: selection,
-          id: newItem.id
         }]
       }
       newCart.push(obj)
     }
+    console.log('newCart', newCart)
     setCart(newCart);
     alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
     setSelection(1)
@@ -63,7 +64,6 @@ export default function RestaurantPage() {
   
   
   const renderCategories = categories.map((category) => {
-   
     return (
       <div>
         <Category>{category}</Category>
@@ -79,9 +79,11 @@ export default function RestaurantPage() {
                   price={item.price}
                   photoUrl={item.photoUrl}
                   category={item.category}
-                  amount={cart.find((cartItem)=> cartItem.id === item.id)?.amount}
+                  amount={
+                    cart[0].products.find((cartItem)=>
+                      cartItem.item.id === item.id)?.quantity}
                   addItemToCart={() => addItemToCart(item)}
-                  removeItemFromCart={() => removeItemFromCart(item)}
+                  removeItemFromCart={() => removeItemFromCart(item)}ax32
                 />
               );
             }
@@ -90,6 +92,10 @@ export default function RestaurantPage() {
       </div>
     );
   });
+
+  if(cart.length>0){
+    console.log('cart', cart[0].products[0])
+  }
 
   return (
     <All>
