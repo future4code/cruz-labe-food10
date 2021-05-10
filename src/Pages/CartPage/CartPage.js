@@ -7,12 +7,12 @@ import {
   CartEmpty,
   Container,
   ContentRestaurant,
-  DivPrice, DivPagamento, DivRadio, Content, All
+  DivPrice, DivPagamento, DivRadio, Content, All, Button
 } from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import {BASE_URL} from "../../constants/url";
 import {api} from "../../Services/api";
@@ -186,8 +186,8 @@ export default function CartPage() {
             </DivRadio>
           </DivPagamento>
 
-          <Button variant="contained" color="secondary" onClick={onClickConfirme}>
-            CONFIRMAR
+          <Button onClick={onClickConfirme}>
+            Confirmar
           </Button>
         </Content>
         <Footer />

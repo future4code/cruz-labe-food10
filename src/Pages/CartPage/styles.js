@@ -113,3 +113,18 @@ export const Content = styled.div`
   padding: 0 16px;
   box-sizing: border-box;
 `
+
+export const Button = styled.button`
+  height: 42px;
+  width: 100%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background-color: #e86e5a;
+  font-size: 16px;
+  letter-spacing: -0.39px;
+  cursor: pointer;
+  border-radius: 2px;
+  color: black;
+`;
