@@ -7,11 +7,13 @@ import avatar_on from '../../Assets/Img/avatar_on.svg'
 import avatar from '../../Assets/Img/avatar.svg'
 import shopping_cart from '../../Assets/Img/shopping-cart.svg'
 import homepage from '../../Assets/Img/homepage.svg'
-import { Title, OrderTitle, AddressContainer, 
-  AddressTitle, TitleContainer, ProfileContainer, 
-  FooterContainer, HistoryOrderTitle, 
+import {
+  Title, OrderTitle, AddressContainer,
+  AddressTitle, TitleContainer, ProfileContainer,
+  FooterContainer, HistoryOrderTitle,
   FooterImgContainer, FooterImg, OrderHistoryCard,
-  OrderHistoryContainer, HistoryContainer } from './styled'
+  OrderHistoryContainer, HistoryContainer, All
+} from './styled'
 import { EditImg } from './styled'
 import OrderHistoryCards from '../../Components/OrderHistoryCards/OrderHistoryCards'
 import { useHistory } from "react-router-dom"
@@ -22,9 +24,10 @@ import {
   goToCart,
   goToProfilePage
 } from "../../Coordination/coordinator"
+import useAuthorization from "../../Hooks/useAuthetication";
 
 const ProfilePage = () => {
-  useAuthentication()
+  useAuthorization()
   const history = useHistory()
   const [profile, setProfile] = useState({})
   const [orders, setOrders] = useState({})
@@ -79,71 +82,73 @@ const ProfilePage = () => {
 
 
   return (
-    <div>
-      <TitleContainer>
-        <Title>
-          Meu Perfil
-        </Title>
-      </TitleContainer>
-      <ProfileContainer>
-        <p>
-          {" "}
-          {profile.name}
-          <EditImg
-            src={edit}
-            alt={"editar"}
-            onClick={() => goToEditProfilePage(history)}
-          />
-        </p>
-        <p>{profile.email}</p>
-        <p>{profile.cpf}</p>
-      </ProfileContainer>
-      {/* ProfileAddressCard - component*/}
-      <AddressContainer>
-      <EditImg
-            src={edit}
-            alt={"editar"}
-            onClick={() => goToAddressPage(history)}
-          />
-        <AddressTitle>Endereço cadastrado</AddressTitle>
-        <p>
-          {profile.address}
+    <All>
+      <div>
+        <TitleContainer>
+          <Title>
+            Meu Perfil
+          </Title>
+        </TitleContainer>
+        <ProfileContainer>
+          <p>
+            {" "}
+            {profile.name}
+            <EditImg
+              src={edit}
+              alt={"editar"}
+              onClick={() => goToEditProfilePage(history)}
+            />
           </p>
-      </AddressContainer>
-      {/* ProfileOrderHistory - component */}
-      <TitleContainer>
-        <OrderTitle>Histórico de pedidos</OrderTitle>
-      </TitleContainer>
-      {/* ProfileOrderCards - component*/}
-      <OrderHistoryContainer>{console.log(listOfOrders)}
-        {listOfOrders ? (
-          <HistoryContainer>
-            <OrderHistoryCard>
-            {listOfOrders}
-            </OrderHistoryCard>
-          </HistoryContainer>
-        ) : (
-          <HistoryOrderTitle>Você não realizou nenhum pedido</HistoryOrderTitle>
-        )}
-      </OrderHistoryContainer>
-      <FooterContainer>
-        {profile ? (
-          <FooterImgContainer>
-            <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
-            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
-            <FooterImg src={avatar_on} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
-          </FooterImgContainer>
-        ) : 
-        (
-          <FooterImgContainer>
-            <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
-            <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
-            <FooterImg src={avatar} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
-          </FooterImgContainer>
-        )}
-        Footer
-        </FooterContainer>
-    </div>
+          <p>{profile.email}</p>
+          <p>{profile.cpf}</p>
+        </ProfileContainer>
+        {/* ProfileAddressCard - component*/}
+        <AddressContainer>
+        <EditImg
+              src={edit}
+              alt={"editar"}
+              onClick={() => goToAddressPage(history)}
+            />
+          <AddressTitle>Endereço cadastrado</AddressTitle>
+          <p>
+            {profile.address}
+            </p>
+        </AddressContainer>
+        {/* ProfileOrderHistory - component */}
+        <TitleContainer>
+          <OrderTitle>Histórico de pedidos</OrderTitle>
+        </TitleContainer>
+        {/* ProfileOrderCards - component*/}
+        <OrderHistoryContainer>{console.log(listOfOrders)}
+          {listOfOrders ? (
+            <HistoryContainer>
+              <OrderHistoryCard>
+              {listOfOrders}
+              </OrderHistoryCard>
+            </HistoryContainer>
+          ) : (
+            <HistoryOrderTitle>Você não realizou nenhum pedido</HistoryOrderTitle>
+          )}
+        </OrderHistoryContainer>
+        <FooterContainer>
+          {profile ? (
+            <FooterImgContainer>
+              <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
+              <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
+              <FooterImg src={avatar_on} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
+            </FooterImgContainer>
+          ) :
+          (
+            <FooterImgContainer>
+              <FooterImg src={homepage} alt={"homepage"} onClick={() => goToFeedPage(history)}/>
+              <FooterImg src={shopping_cart} alt={"carrinho"} onClick={() => goToCart(history)} />
+              <FooterImg src={avatar} alt={"perfil"} onCLick={() => goToProfilePage(history)}/>
+            </FooterImgContainer>
+          )}
+          Footer
+          </FooterContainer>
+      </div>
+    </All>
   );
 };
 

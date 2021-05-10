@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import {Card, Img, Container} from "./styles"
+import {Card, Img, DivImg, Description, DivAlert, TopText, MiddleText, BottomText} from "./styles"
 import AlertDialog from "../AlertDialog"
 
 
@@ -16,22 +16,38 @@ function CardProduct(props) {
   
   
     
-
   return (
-      <div>
          <Card>
-              <div>
+              <DivImg>
                 <Img src={props.photoUrl} />
-              </div>
-              <div>
-              {props.amount}
-                <div>{props.name}</div>
-                <div>{props.description}</div>
-                <div>{props.price.toFixed(2)}</div>
-                <AlertDialog handleClose={handleClose} addItemToCart={props.addItemToCart}  id={props.id} removeItemFromCart={props.removeItemFromCart} open={open} />
-              </div>
-            </Card>
-      </div>
+              </DivImg>
+              <Description>
+                <TopText>
+                  <p>{props.name}</p>
+                  {props.amount>0? (
+                    <p>{props.amount}</p>
+                  ):(<></>)}
+                </TopText>
+                <MiddleText>
+                  {props.description}
+                </MiddleText>
+                <BottomText>
+                  <p>R${props.price.toFixed(2)}</p>
+                  <AlertDialog
+                    handleClose={handleClose}
+                    addItemToCart={props.addItemToCart}
+                    id={props.id}
+                    removeItemFromCart={props.removeItemFromCart}
+                    open={open}
+                    idRestaurant={props.idRestaurant}
+                  />
+                </BottomText>
+                {/*{props.amount}*/}
+                {/*<p>{props.name}</p>*/}
+                {/*<p>{props.description}</p>*/}
+                {/*<p>R${props.price.toFixed(2)}</p>*/}
+              </Description>
+         </Card>
   );
 }
 

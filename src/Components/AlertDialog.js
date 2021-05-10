@@ -13,10 +13,12 @@ import CloseIcon from "@material-ui/icons/Close";
 import { IconButton } from "@material-ui/core";
 import styled from "styled-components";
 import GlobalStateContext from '../Global/GlobalStateContext'
+import MyButton from "./buttonStyledMaterial";
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
 export default function AlertDialog(props) {
   const [findCart, setFindCart] = useState()
   const { cart, setCart } = useContext(GlobalStateContext);
@@ -44,7 +46,15 @@ export default function AlertDialog(props) {
     props.removeItemFromCart();
   }
   const changeButton = () =>{
-    const findArray = cart.find(card => card.id === props.id);
+    let findArray
+    const indexRestaurant = cart.findIndex(restaurant=>{
+      return restaurant.id === props.idRestaurant
+    })
+    if(cart.length>=indexRestaurant && indexRestaurant>=0){
+      findArray = cart[indexRestaurant].products.find(item=>{
+        return item.item.id === props.id
+      })
+    }
     setFindCart(findArray);
   }
   useEffect(()=>{
@@ -55,14 +65,14 @@ export default function AlertDialog(props) {
     <div>
       <ButtonContainer>
        { findCart ? (
-        <Button variant="outlined" color="secondary" onClick={handleRemove}>
-        REMOVER
-      </Button>
+        <MyButton variant="outlined" color="secondary" onClick={handleRemove}>
+        remover
+      </MyButton>
        ): (
-       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
-       ADICIONAR
-     </Button>)
-       } 
+       <MyButton variant="outlined" color="secondary" onClick={handleClickOpen} add={true}>
+       adicionar
+     </MyButton>)
+       }
       </ButtonContainer>
 
       <Dialog

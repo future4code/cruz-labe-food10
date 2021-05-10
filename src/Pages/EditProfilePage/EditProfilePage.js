@@ -11,6 +11,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import theme from '../../constants/themes'
 import back from '../../Assets/Img/back.svg'
 import { makeStyles } from '@material-ui/core/styles'
+import useAuthorization from "../../Hooks/useAuthetication";
 
 const useStyles = makeStyles({
   label: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 })
 
 const EditProfilePage = () => {
-  useAuthentication()
+  useAuthorization()
   const classes = useStyles()
   const history = useHistory()
   const [form, onChange, clear, setAll] = useForm({name: "", email: "", cpf: ""})

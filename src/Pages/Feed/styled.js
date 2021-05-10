@@ -15,8 +15,9 @@ export const Content = styled.div`
   align-items: center;
   width: min(415px, 100%);
   height: min(800px, 100%);
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  @media (min-width: 416px) {
+    border: 1px solid #787878;
+  }
 `
 
 export const Header = styled.header`
@@ -51,7 +52,7 @@ export const MyCircularProgress = styled(CircularProgress)`
 
 export const ContentRestaurant = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 230px);
   overflow-y: auto;
   overflow-x: hidden;
 `

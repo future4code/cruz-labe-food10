@@ -17,9 +17,10 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 const useStyles = makeStyles({
   root: {
-    width: 350,
+    width: 'min(415px, 100%)',
     position:'fixed',
     bottom:0,
+    boxShadow: '0 0 2px black',
   },
 });
 

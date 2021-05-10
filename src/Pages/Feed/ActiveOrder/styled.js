@@ -1,13 +1,18 @@
 import styled from 'styled-components'
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 
 export const All = styled.aside`
-  width: 360px;
+  transition: width 1s;
+  width: ${props=>props.width? '100%': '0'};
   height: 118px;
   background-color: #e86e5a;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  bottom: 56px;
+  cursor: pointer;
+  overflow: hidden;
 `
 
 export const Img = styled.img`
@@ -24,4 +29,17 @@ export const DivText = styled.div`
       color:  white;
     }
   }
+`
+
+export const AllOpen = styled.div`
+  position: fixed;
+  bottom: 56px;
+  right: 0px;
+`
+
+export const MyMenuOpen = styled(MenuOpenIcon)`
+  width: 40px;
+  height: 40px;
+  color: #e86e5a;
+  cursor: pointer;
 `

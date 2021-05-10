@@ -86,9 +86,8 @@ export const P = styled.p`
 
 export const ContentRestaurant = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 190px);
   margin-top: 8px;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: white;
 `

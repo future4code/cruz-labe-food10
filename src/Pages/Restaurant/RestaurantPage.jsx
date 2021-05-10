@@ -1,40 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
-import { DivBack, ImgBack, P } from "./styles";
+import {All, AllContent, Category, Content, DivBack, ImgBack, P} from "./styles";
 import iconBack from "../../Assets/Img/back.svg";
 import Loading from '../../Components/Loading/Loading'
 import axios from "axios";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import Footer from '../../Components/Footer/Footer'
 import CardProduct from "../../Components/CardProduct/CardProduto";
+import useRequestData from "../../Hooks/useRequestData";
 
 export default function RestaurantPage() {
   const params = useParams();
   const history = useHistory();
-  const [restaurantDetails, setRestaurantDetails] = useState({});
+  if(!params.id)history.goBack()
+  const [restaurantDetails, setRestaurantDetails] = useRequestData(
+    `/restaurants/${params.id}`,
+    {},
+    'restaurant'
+  )
   const [categories, setCategories] = useState([]);
   const {cart, setCart, removeItemFromCart} = useContext(GlobalStateContext)
   const {selection, setSelection} = useContext(GlobalStateContext)
-   
-  useEffect(() => {
-    getRestaurantDetails(params.id);
-  }, [params.id]);
-
-  const getRestaurantDetails = () => {
-    axios
-      .get(
-        `https://us-central1-missao-newton.cloudfunctions.net/rappi4D/restaurants/${params.id}`,
-        { headers: { auth: localStorage.getItem("token") } }
-      )
-      .then((res) => {
-        setRestaurantDetails(res.data.restaurant);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
-  
 
   useEffect(() => {
     if (restaurantDetails && restaurantDetails.products) {
@@ -48,22 +35,36 @@ export default function RestaurantPage() {
     }
   }, [restaurantDetails]);
 
-
   const addItemToCart = (newItem) => {
     let newCart = [...cart];
-
-    newCart.push({ ...newItem, amount: selection });
+    const index = newCart.findIndex((restaurant)=>{
+      return restaurant.id === params.id
+    })
+    if(index>=0){
+      newCart[index].products.push({
+        item: newItem,
+        quantity: selection,
+      })
+    }
+    else{
+      const obj = {
+        id: params.id,
+        products:[{
+          item: newItem,
+          quantity: selection,
+        }]
+      }
+      newCart.push(obj)
+    }
     setCart(newCart);
-    alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
     setSelection(1)
   };
   
   
   const renderCategories = categories.map((category) => {
-   
     return (
       <div>
-        <h1>{category}</h1>
+        <Category>{category}</Category>
         {restaurantDetails.products &&
           restaurantDetails.products.map((item) => {
             if(item.category === category){
@@ -71,14 +72,17 @@ export default function RestaurantPage() {
                 <CardProduct
                   key={item.id}
                   id={item.id}
+                  idRestaurant = {params.id}
                   name={item.name}
                   description={item.description}
                   price={item.price}
                   photoUrl={item.photoUrl}
                   category={item.category}
-                  amount={cart.find((cartItem)=> cartItem.id === item.id)?.amount}
+                  amount={cart.length>0 &&
+                    cart[0].products.find((cartItem)=>
+                      cartItem.item.id === item.id)?.quantity}
                   addItemToCart={() => addItemToCart(item)}
-                  removeItemFromCart={() => removeItemFromCart(item)}
+                  removeItemFromCart={() => removeItemFromCart(item, params.id)}
                 />
               );
             }
@@ -89,15 +93,20 @@ export default function RestaurantPage() {
   });
 
   return (
-    <>
-      <DivBack>
-        <ImgBack src={iconBack} onClick={() => history.goBack()} />
-        <P>Restaurante</P>
-        <div></div>
-      </DivBack>
-      <CardRestaurant id={params.id} page={"Restaurant"} />
-      {restaurantDetails ? renderCategories : <Loading/>}
-      <Footer/>
-    </>
+    <All>
+      <AllContent>
+        <DivBack>
+          <ImgBack src={iconBack} onClick={() => history.goBack()} />
+          <P>Restaurante</P>
+          <div></div>
+        </DivBack>
+
+        <Content>
+          <CardRestaurant id={params.id} page={"Restaurant"} />
+          {restaurantDetails ? renderCategories : <Loading/>}
+        </Content>
+        <Footer/>
+      </AllContent>
+    </All>
   );
 }
