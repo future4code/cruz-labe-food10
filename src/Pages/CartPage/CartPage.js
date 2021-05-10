@@ -41,7 +41,7 @@ export default function CartPage() {
 
   const getPrice = () => {
     if (cart.length > 0) {
-      let cartPrice = cart.map((item) => {
+      let cartPrice = cart[0].products.map((item) => {
           return item.item.price * item.quantity;
         });
       const total = cartPrice.reduce(
@@ -68,18 +68,19 @@ export default function CartPage() {
         }
       </AddressContainer>
 
-      {cart.map((item) => {
+      {cart.length>0 && cart[0].products.map((item) => {
         return (
           <CardProduct
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            amount={item.amount}
-            photoUrl={item.photoUrl}
-            category={item.category}
-            removeItemFromCart={() => removeItemFromCart(item)}
+            key={item.item.id}
+            id={item.item.id}
+            idRestaurant={cart[0].id}
+            name={item.item.name}
+            description={item.item.description}
+            price={item.item.price}
+            amount={item.quantity}
+            photoUrl={item.item.photoUrl}
+            category={item.item.category}
+            removeItemFromCart={() => removeItemFromCart(item.item, cart[0].id)}
           />
         );
       })}

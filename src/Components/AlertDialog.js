@@ -55,7 +55,6 @@ export default function AlertDialog(props) {
         return item.item.id === props.id
       })
     }
-    console.log('indexRestaurant', indexRestaurant,'findArray', findArray, 'props.id', props.id, 'cart', cart)
     setFindCart(findArray);
   }
   useEffect(()=>{
