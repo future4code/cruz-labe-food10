@@ -16,6 +16,7 @@ import Footer from "../../Components/Footer/Footer";
 import { makeStyles } from "@material-ui/core/styles";
 import {BASE_URL} from "../../constants/url";
 import {api} from "../../Services/api";
+import useAuthorization from "../../Hooks/useAuthetication";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CartPage() {
+  useAuthorization()
   const { cart, removeItemFromCart, setCart } = useContext(GlobalStateContext);
   const [price, setPrice] = useState(0);
   const [address, setAddress] = useState();

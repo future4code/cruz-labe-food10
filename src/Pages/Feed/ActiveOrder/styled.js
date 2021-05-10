@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 
 export const All = styled.aside`
-  width: 100%;
+  transition: width 1s;
+  width: ${props=>props.width? '100%': '0'};
   height: 118px;
   background-color: #e86e5a;
   display: flex;
@@ -11,6 +12,7 @@ export const All = styled.aside`
   position: fixed;
   bottom: 56px;
   cursor: pointer;
+  overflow: hidden;
 `
 
 export const Img = styled.img`
@@ -36,8 +38,8 @@ export const AllOpen = styled.div`
 `
 
 export const MyMenuOpen = styled(MenuOpenIcon)`
-  width: 30px;
+  width: 40px;
+  height: 40px;
   color: #e86e5a;
-  transform: scale(1.5);
   cursor: pointer;
 `

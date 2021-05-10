@@ -8,10 +8,20 @@ import { StylesProvider } from '@material-ui/core/styles';
 export default function ActiveOrder() {
   const [activeOrder] = useRequestData('/active-order',{}, 'order')
   const [show, setShow] = useState(false);
+  const [width, setWidth] = useState(false);
+
+  const transition=()=>{
+    setShow(!show)
+    setTimeout(()=>{
+      setWidth(!width)
+    },500)
+
+  }
+
   return(
     activeOrder && activeOrder.totalPrice?(
       show?(
-      <All onClick={()=>setShow(false)}>
+      <All onClick={transition} width={width}>
         <Img src={iconClock} />
         <DivText>
           <p>Pedido em andamento</p>
@@ -22,7 +32,7 @@ export default function ActiveOrder() {
       ):(
         <AllOpen>
           <StylesProvider injectFirst >
-            <MyMenuOpen onClick={()=>setShow(true)}/>
+            <MyMenuOpen onClick={transition}/>
           </StylesProvider>
         </AllOpen>
       )

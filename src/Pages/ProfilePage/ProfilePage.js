@@ -24,9 +24,10 @@ import {
   goToCart,
   goToProfilePage
 } from "../../Coordination/coordinator"
+import useAuthorization from "../../Hooks/useAuthetication";
 
 const ProfilePage = () => {
-  useAuthentication()
+  useAuthorization()
   const history = useHistory()
   const [profile, setProfile] = useState({})
   const [orders, setOrders] = useState({})
