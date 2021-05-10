@@ -58,6 +58,8 @@ export default function CartPage() {
     getPrice();
   }, [cart]);
 
+  console.log('cart',cart)
+
   return (
     <Container>
       <Header> Meu carrinho</Header>
