@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 
 export const All = styled.aside`
-  width: 360px;
+  width: 100%;
   height: 118px;
   background-color: #e86e5a;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: fixed;
+  bottom: 56px;
 `
 
 export const Img = styled.img`
