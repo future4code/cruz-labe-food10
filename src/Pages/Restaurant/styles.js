@@ -56,7 +56,7 @@ export const AllContent = styled.div`
   height: min(800px, 100%);
   overflow: hidden;
   @media (min-width: 416px){
-    border: 1px solid #b8b8b8;
+    border: 1px solid #787878;
   }
 `
 

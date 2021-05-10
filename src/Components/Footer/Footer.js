@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     width: 'min(415px, 100%)',
     position:'fixed',
     bottom:0,
-    boxShadow: '0 0 2px black'
+    boxShadow: '0 0 2px black',
   },
 });
 

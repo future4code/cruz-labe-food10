@@ -49,9 +49,9 @@ export const OrderTitle = styled.p`
 
 export const FooterContainer = styled.div`
   position: fixed;
-  left: 0;
+  //left: 0;
   bottom: 0;
-  width: 100%;
+  width: min(415px, 100%);
   height: 15vw;
   color: white;
   text-align: center;
@@ -94,4 +94,18 @@ export const HistoryContainer = styled.div`
   padding: 2vw 8vw;
   padding-bottom: 1vw;
   background-color: white;
+`
+
+export const All = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  >div{
+    width: min(415px, 100%);
+    height: min(800px, 100%);
+    @media (min-width: 416px) {
+      border: 1px solid #787878;
+    }
+  }
 `
