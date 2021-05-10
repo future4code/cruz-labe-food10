@@ -33,7 +33,14 @@ function CardProduct(props) {
                 </MiddleText>
                 <BottomText>
                   <p>R${props.price.toFixed(2)}</p>
-                  <AlertDialog handleClose={handleClose} addItemToCart={props.addItemToCart}  id={props.id} removeItemFromCart={props.removeItemFromCart} open={open} />
+                  <AlertDialog
+                    handleClose={handleClose}
+                    addItemToCart={props.addItemToCart}
+                    id={props.id}
+                    removeItemFromCart={props.removeItemFromCart}
+                    open={open}
+                    idRestaurant={props.idRestaurant}
+                  />
                 </BottomText>
                 {/*{props.amount}*/}
                 {/*<p>{props.name}</p>*/}

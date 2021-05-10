@@ -56,9 +56,7 @@ export default function RestaurantPage() {
       }
       newCart.push(obj)
     }
-    console.log('newCart', newCart)
     setCart(newCart);
-    alert(`${newItem.name} foi adicionado com sucesso ao carrinho!`)
     setSelection(1)
   };
   
@@ -74,16 +72,17 @@ export default function RestaurantPage() {
                 <CardProduct
                   key={item.id}
                   id={item.id}
+                  idRestaurant = {params.id}
                   name={item.name}
                   description={item.description}
                   price={item.price}
                   photoUrl={item.photoUrl}
                   category={item.category}
-                  amount={
+                  amount={cart.length>0 &&
                     cart[0].products.find((cartItem)=>
                       cartItem.item.id === item.id)?.quantity}
                   addItemToCart={() => addItemToCart(item)}
-                  removeItemFromCart={() => removeItemFromCart(item)}ax32
+                  removeItemFromCart={() => removeItemFromCart(item, params.id)}
                 />
               );
             }
@@ -92,10 +91,6 @@ export default function RestaurantPage() {
       </div>
     );
   });
-
-  if(cart.length>0){
-    console.log('cart', cart[0].products[0])
-  }
 
   return (
     <All>

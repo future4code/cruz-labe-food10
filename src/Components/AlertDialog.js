@@ -46,7 +46,16 @@ export default function AlertDialog(props) {
     props.removeItemFromCart();
   }
   const changeButton = () =>{
-    const findArray = cart.find(card => card.id === props.id);
+    let findArray
+    const indexRestaurant = cart.findIndex(restaurant=>{
+      return restaurant.id === props.idRestaurant
+    })
+    if(cart.length>=indexRestaurant && indexRestaurant>=0){
+      findArray = cart[indexRestaurant].products.find(item=>{
+        return item.item.id === props.id
+      })
+    }
+    console.log('indexRestaurant', indexRestaurant,'findArray', findArray, 'props.id', props.id, 'cart', cart)
     setFindCart(findArray);
   }
   useEffect(()=>{

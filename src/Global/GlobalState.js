@@ -25,13 +25,19 @@ export const GlobalState = (props) => {
     getProfile()
   }, [])
 
-  const removeItemFromCart = (itemToRemove) => {
-    const index = cart.findIndex((item) => item.id === itemToRemove.id);
+  const removeItemFromCart = (itemToRemove, idRestaurant) => {
+    const indexRestaurant = cart.findIndex(restaurant=>{
+      return restaurant.id === idRestaurant
+    })
+    const indexProduct = cart[indexRestaurant].products.findIndex(item=>{
+      return itemToRemove.id === item.item.id
+    })
     let newCart = [...cart];
-    if (newCart[index].amount === 1) {
-      newCart.splice(index, 1);
+
+    if (newCart[indexRestaurant].products[indexProduct].quantity === 1) {
+      newCart[indexRestaurant].products.splice(indexProduct, 1)
     } else {
-      newCart[index].amount -= 1;
+      newCart[indexRestaurant].products[indexProduct].quantity--
     }
     setCart(newCart);
   };
