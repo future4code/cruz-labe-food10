@@ -18,6 +18,7 @@ export const DivBack = styled.div`
     margin-top: 30px;
     margin-bottom: 10px;
   }
+  background-color: white;
 `
 
 export const ImgBack = styled.img`

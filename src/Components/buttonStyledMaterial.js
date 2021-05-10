@@ -9,7 +9,8 @@ const MyButton = styled(Button)({
   borderTopLeftRadius: '8px',
   fontSize: '12px',
   color: (props=>props.add? 'black':''),
-  border: (props=>props.add? '1px solid black':'')
+  border: (props=>props.add? '1px solid black':''),
+  textTransform: 'lowercase',
 })
 
 

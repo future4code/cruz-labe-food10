@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
-  width:360px;
+  width:100%;
   display:flex;
   border:1px solid #E5E5EA;
-  border-radius:5px;
+  border-radius:8px;
   height: 112px;
   margin-bottom: 8px;
-  position: relative;
 `;
 
 export const DivImg = styled.div`
@@ -15,41 +14,68 @@ export const DivImg = styled.div`
   height: 112px;
   display: flex;
   align-items: center;
-  position: relative;
-`
-
-export const BlurImg = styled.div`
-  background-image: url(${props=>props.photoUrl});
-  background-size: 97px 112px;
-  position: absolute;
-  width: 97px;
-  height: 112px;
-  top: 0;
-  filter: blur(2px);
-  left: 0;
 `
 
 export const Img = styled.img`
   width: 97px;
-  position: absolute;
-  left: 0;
 `;
 
 export const Description = styled.div`
-  height: 112px;
-  padding: 0 16px;
-  position: absolute;
-  left: 97px;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  padding-left: 16px;
+  box-sizing: border-box;
+`
+
+export const TopText = styled.div`
+  width: 100%;
+  height: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   >p{
-    :nth-child(1){
-      color: #e86e5a;
-      font-size: 16px;
-    }
+    padding: 0;
+    margin: 0;
+    color: #e86e5a;
     :nth-child(2){
-      color: #b8b8b8;
-      font-size: 14px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #e86e5a;
+      box-sizing: border-box;
+      border-top-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      margin-bottom: 1px;
     }
   }
+`
+
+export const MiddleText = styled.div`
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #b8b8b8;
+  overflow-y: auto;
+`
+
+export const BottomText = styled.div`
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  >p{
+    margin: 0;
+    height: 40px;
+    box-sizing: border-box;
+    padding-top: 6px;
+  }
+  margin-top: 1px;
 `
 
 export const DivAlert = styled.div`
