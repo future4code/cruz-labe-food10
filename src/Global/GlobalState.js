@@ -36,6 +36,9 @@ export const GlobalState = (props) => {
 
     if (newCart[indexRestaurant].products[indexProduct].quantity === 1) {
       newCart[indexRestaurant].products.splice(indexProduct, 1)
+      if(newCart[indexRestaurant].products.length===0){
+        newCart.splice(indexRestaurant, 1)
+      }
     } else {
       newCart[indexRestaurant].products[indexProduct].quantity--
     }
