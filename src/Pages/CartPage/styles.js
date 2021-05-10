@@ -59,3 +59,36 @@ export const CartEmpty = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const ContentRestaurant = styled.div`
+  width: 100%;
+  height: 102px;
+  padding: 16px 0;
+  box-sizing: border-box;
+`
+
+export const DivPrice = styled.div`
+  width: 100%;
+  height: 52px;
+  margin: 16px 0 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  >p{
+    margin: 0;
+  }
+  >div{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    >p{
+      margin: 0;
+      :nth-child(2){
+        color: #e86e5a;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+  }
+`

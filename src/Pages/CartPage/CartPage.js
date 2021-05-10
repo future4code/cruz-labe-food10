@@ -1,7 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import CardRestaurant from "../../Components/CardRestaurant/CardRestaurant";
 import CardProduct from "../../Components/CardProduct/CardProduto";
-import {Card, Img, AddressTitle, AddressContainer, Header, CartEmpty, Container} from "./styles";
+import {
+  Card,
+  Img,
+  AddressTitle,
+  AddressContainer,
+  Header,
+  CartEmpty,
+  Container,
+  ContentRestaurant,
+  DivPrice
+} from "./styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
@@ -22,10 +32,25 @@ export default function CartPage() {
   const { cart, removeItemFromCart } = useContext(GlobalStateContext);
   const [price, setPrice] = useState([]);
   const [address, setAddress] = useState();
+  const [shipping, setShipping] = useState(0);
 
   useEffect(() => {
     getAddress();
   }, []);
+
+  const getShipping = async ()=>{
+    try {
+      const res = await api.get(`/restaurants/${cart[0].id}`)
+      setShipping(res.data.restaurant.shipping)
+    }
+    catch (err){
+      console.log('erro', err)
+    }
+  }
+
+  useEffect(()=>{
+    if(cart.length>0)getShipping()
+  },[cart])
 
   const getAddress = () => {
     axios
@@ -49,7 +74,7 @@ export default function CartPage() {
       const total = cartPrice.reduce(
         (total, currentElement) => total + currentElement
       );
-      setPrice(total.toFixed(2));
+      setPrice(total+shipping);
     }
   };
   
@@ -97,6 +122,12 @@ export default function CartPage() {
         }
       </AddressContainer>
 
+      {cart.length > 0 &&
+        <ContentRestaurant>
+          <CardRestaurant id={cart[0].id} page={'Cart'}/>
+        </ContentRestaurant>
+      }
+
       {cart.length>0 && cart[0].products.map((item) => {
         return (
           <CardProduct
@@ -113,10 +144,17 @@ export default function CartPage() {
           />
         );
       })}
-      <div>
-        {cart.length > 0 ? <></> : <CartEmpty> Carrinho Vazio</CartEmpty>}
-        <h2>TOTAL</h2>
-      </div>
+
+      {cart.length > 0 ? <></> : <CartEmpty> Carrinho Vazio</CartEmpty>}
+
+      <DivPrice>
+        <p>Frete R${shipping.toFixed(2)}</p>
+        <div>
+          <p>SUBTOTAL</p>
+          <p>R${price.toFixed(2)}</p>
+        </div>
+      </DivPrice>
+
       <Button variant="contained" color="secondary" onClick={onClickConfirme}>
         CONFIRMAR
       </Button>
